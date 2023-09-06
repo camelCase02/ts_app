@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
               elevation: 0, iconTheme: IconThemeData(color: Colors.black)),
           scaffoldBackgroundColor: GlobalVariables.backgroundColor),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: AuthScreen()
+      home: const AuthScreen()
     );
   }
 }
