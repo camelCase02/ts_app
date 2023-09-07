@@ -44,10 +44,12 @@ nameController.dispose();
       backgroundColor: GlobalVariables.greyBackgroundCOlor,
       body: SafeArea(child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
       const Text("Welcome", style: TextStyle(fontSize: 22),),
 
-      ListTile(tileColor: _auth==Auth.createAccount?GlobalVariables.backgroundColor:GlobalVariables.greyBackgroundCOlor,
+      ListTile(
+        tileColor: _auth==Auth.createAccount?GlobalVariables.backgroundColor:GlobalVariables.greyBackgroundCOlor,
         title: const Text("create Account",
        style: TextStyle(fontWeight: FontWeight.bold),),
        leading: Radio( 
@@ -84,7 +86,8 @@ nameController.dispose();
           ),
         ),
       
-      ListTile(title: const Text("Login",
+      ListTile(  tileColor: _auth==Auth.login?GlobalVariables.backgroundColor:GlobalVariables.greyBackgroundCOlor,
+        title: const Text("Login",
        style: TextStyle(fontWeight: FontWeight.bold),),
        leading: Radio( 
         activeColor: GlobalVariables.secondaryColor,
@@ -95,7 +98,28 @@ nameController.dispose();
             _auth=value!;
           });
         },
-      ),)
+      ),),
+      if(_auth==Auth.login)
+        Container(color: GlobalVariables.backgroundColor,
+          child: Form(
+            key: createAccountFormKey,
+          child: Column(children: [
+           
+            CustomTextfield(controller:emailController ,
+            hintText: "Email....",
+            ),
+            CustomTextfield(controller:passwordController ,
+            hintText: "password....",
+            ),
+             Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: CustomButton(onTap: (){},
+                         text: "Login"),
+             )
+           
+          ],),
+          ),
+        ),
       
         ],),
       )),
