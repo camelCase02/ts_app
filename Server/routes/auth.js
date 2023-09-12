@@ -24,10 +24,15 @@ const hashedPassword= await bcryptjs.hash(password, 8)
  user=await user.save();
  res.json(user);
     } catch (error) {
-        res.status(500).json({error:e.message})
+        res.status(500).json({error:e.message+"etwas went wrong, check your data"})
     }
  
 
 })
+
+
+//login route 
+
+
 
 module.exports=authRouter;

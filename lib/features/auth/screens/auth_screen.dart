@@ -96,8 +96,12 @@ class _AuthScreenState extends State<AuthScreen> {
                         padding: const EdgeInsets.all(8.0),
                         child: CustomButton(
                             onTap: () {
-                              createAccountforUser();
-                            }, text: "Create an Account"),
+                              if (createAccountFormKey.currentState!
+                                  .validate()) {
+                                createAccountforUser();
+                              }
+                            },
+                            text: "Create an Account"),
                       )
                     ],
                   ),

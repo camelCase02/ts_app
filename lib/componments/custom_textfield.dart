@@ -20,7 +20,9 @@ final String hintText;
           borderSide: BorderSide(color: Colors.green)
         ) ),
         validator: (value){
-    
+          if(value==null||value.isEmpty){
+            return "Enter your $hintText";
+          } return null;
         },
       ),
     );
