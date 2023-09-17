@@ -38,7 +38,6 @@ class AuthService {
             'Content-Type': 'application/json; charset=UTF-8'
           });
 
-
       httpErrorHandler(
           response: res,
           context: context,
@@ -65,27 +64,64 @@ class AuthService {
             'Content-Type': 'application/json; charset=UTF-8'
           });
 
-  
-      // ignore: use_build_context_synchronously
+    
       httpErrorHandler(
           response: res,
           context: context,
           onSuccess: () async {
-
             SharedPreferences sharedPreferences =
                 await SharedPreferences.getInstance();
 
-                                Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+            Provider.of<UserProvider>(context, listen: false).setUser(res.body);
             await sharedPreferences.setString(
                 'x-auth-token', jsonDecode(res.body)['token']);
-Navigator.pushAndRemoveUntil(
-    context,
-    generateRoute(const RouteSettings(name: HomeScreen.routeName)),
-    (route) => false
-);
+            Navigator.pushAndRemoveUntil(
+                context,
+                generateRoute(const RouteSettings(name: HomeScreen.routeName)),
+                (route) => false);
           });
     } catch (e) {
       showSnackBar(context, e.toString());
     }
   }
+
+//get user Data 
+Future<void> getUserData(
+
+     BuildContext context,
+   
+  ) async {
+    try {
+      SharedPreferences preferences=await SharedPreferences.getInstance();
+      String ? token=preferences.getString('x-auth-token');
+
+      if(token==null){
+        preferences.setString('x-auth-token', '');
+      }
+
+   var tokenRes=   await http.post(Uri.parse("$uri/tokenIsValid"),
+   headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-auth-token':token!
+
+   }
+   );
+
+var response =  jsonDecode(  tokenRes.body);
+      if(response==true){
+      http.Response userRes=  await http.get(Uri.parse("$uri/"), headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-auth-token':token
+
+   });
+   var userProvider=Provider.of<UserProvider>(context, listen:false);
+   userProvider.setUser(userRes.body);
+      }
+     
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+
 }
