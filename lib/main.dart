@@ -1,3 +1,4 @@
+import 'package:amazon_clone/componments/botton_bar.dart';
 import 'package:amazon_clone/constants/global_veriables.dart';
 import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
 import 'package:amazon_clone/features/auth/services/auth_service.dart';
@@ -58,7 +59,7 @@ class _MyAppState extends State<MyApp> {
             return Consumer<UserProvider>(
               builder: (context, userProvider, child) {
                 if (userProvider.user.token.isNotEmpty) {
-                  return const HomeScreen();
+                  return const BottonBar();
                 } else {
                  return const AuthScreen();
                 }
