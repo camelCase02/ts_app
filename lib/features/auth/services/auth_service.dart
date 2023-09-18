@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_veriables.dart';
 import 'package:amazon_clone/constants/utilis.dart';
-import 'package:amazon_clone/home/screens/home_screen.dart';
+import 'package:amazon_clone/features/home/screens/home_screen.dart';
 import 'package:amazon_clone/models/user.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:amazon_clone/router.dart';
