@@ -40,9 +40,11 @@ class _AuthScreenState extends State<AuthScreen> {
         password: passwordController.text);
   }
 
-
-  void loginforUser(){
-    authService.loginUser(email: emailController.text, context: context, password: passwordController.text);
+  void loginforUser() {
+    authService.loginUser(
+        email: emailController.text,
+        context: context,
+        password: passwordController.text);
   }
 
   @override
@@ -148,12 +150,13 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: CustomButton( onTap: () {
-                              if (loginFormKey.currentState!
-                                  .validate()) {
+                        child: CustomButton(
+                            onTap: () {
+                              if (loginFormKey.currentState!.validate()) {
                                 loginforUser();
                               }
-                            }, text: "Login"),
+                            },
+                            text: "Login"),
                       )
                     ],
                   ),
