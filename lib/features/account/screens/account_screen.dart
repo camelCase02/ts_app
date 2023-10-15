@@ -1,5 +1,5 @@
 import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/features/home/widgets/deal_of_day.dart';
+
 import 'package:amazon_clone/features/account/widgets/orders.dart';
 import 'package:flutter/material.dart';
 
