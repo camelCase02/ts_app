@@ -1,11 +1,13 @@
 import 'package:amazon_clone/componments/botton_bar.dart';
 import 'package:amazon_clone/constants/global_veriables.dart';
+import 'package:amazon_clone/features/admin/screens/admin_screen.dart';
 import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
 import 'package:amazon_clone/features/auth/services/auth_service.dart';
 
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:amazon_clone/router.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -40,33 +42,42 @@ class _MyAppState extends State<MyApp> {
                 elevation: 0, iconTheme: IconThemeData(color: Colors.black)),
             scaffoldBackgroundColor: GlobalVariables.backgroundColor),
         onGenerateRoute: (settings) => generateRoute(settings),
-        home: FutureBuilder(
-          future: fetchUserData(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Align( alignment: Alignment.bottomCenter,
-                child: LinearProgressIndicator(backgroundColor: Colors.black,
-                  color: Colors.red,
-                ),
-              ); // or some loading screen
-            }
-
-            if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            }
-
-            // Wrap the part of the widget tree you want to rebuild with a Consumer<UserProvider>
-            return Consumer<UserProvider>(
-              builder: (context, userProvider, child) {
-                if (userProvider.user.token.isNotEmpty) {
-                  return const BottonBar();
-                } else {
-                 return const AuthScreen();
-                }
-                
-              },
-            );
-          },
+        home: Scaffold(backgroundColor: Colors.black,
+          body: FutureBuilder(
+            future: fetchUserData(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return  Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Center(
+                      child:  Lottie.asset('assets/Animation.json'),  ),
+          
+                 
+                  ],
+                ); // or some loading screen
+              }
+        
+              if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              }
+        
+              // Wrap the part of the widget tree you want to rebuild with a Consumer<UserProvider>
+              return Consumer<UserProvider>(
+                builder: (context, userProvider, child) {
+                  if (userProvider.user.token.isNotEmpty&&userProvider.user.type=="user" ) {
+                    return const BottonBar();
+        
+                  } 
+                   if (userProvider.user.token.isNotEmpty&&userProvider.user.type!="user" ) {
+                    return const AdminScreen();
+                }  else {
+                   return const AuthScreen();
+                  }
+                  
+                },
+              );
+            },
+          ),
         ));
   }
 }
