@@ -1,6 +1,7 @@
 
 
 import 'package:amazon_clone/constants/global_veriables.dart';
+import 'package:amazon_clone/features/admin/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _AdminScreenState extends State<AdminScreen> {
   final double bottonBarBorderWidth = 5;
 
 List<Widget>pages= [
- const Center(child: Text("Post Page"),),
+ const PostsScreen(),
  const Center(child: Text("Analytics Page"),),
    const Center(child: Text("Orders"),)
 ];
