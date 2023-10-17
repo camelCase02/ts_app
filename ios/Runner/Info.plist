@@ -47,5 +47,7 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Willste Produkt verkaufen, musste Foto hochladen... So einfach du Depp!</string>
 </dict>
 </plist>
