@@ -4,6 +4,7 @@ import 'package:amazon_clone/componments/custom_textfield.dart';
 import 'package:amazon_clone/componments/customer_button.dart';
 import 'package:amazon_clone/constants/global_veriables.dart';
 import 'package:amazon_clone/constants/utilis.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 
@@ -66,6 +67,18 @@ void selectImages ()async{
           child: Form(
             child: Column(
               children: [
+                images.isNotEmpty?
+                 CarouselSlider(
+        items: images.map((e) {
+          return Builder(
+              builder: (BuildContext context) => Image.file(
+                    e,
+                    fit: BoxFit.cover,
+                    height: 200,
+                  ));
+        }).toList(),
+        options: CarouselOptions(viewportFraction: 1, height: 200))
+                 :
                 GestureDetector(onTap: selectImages,
                   child: DottedBorder(
                       dashPattern: const [10, 4],
