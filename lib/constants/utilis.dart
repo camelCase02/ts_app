@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void showSnackBar(BuildContext context, String text) {
@@ -16,6 +17,9 @@ if (file!=null&&file.files.isNotEmpty){
   }
 }
 } catch (e) {
-  print("e.toString() user has picket a image ${e.toString()}");
+ 
+  if (kDebugMode) {
+    print("e.toString() user has picket a image ${e.toString()}");
+  }
 } return images;
 }
