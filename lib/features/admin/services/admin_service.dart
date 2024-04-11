@@ -7,11 +7,12 @@ import 'package:amazon_clone/constants/utilis.dart';
 import 'package:amazon_clone/features/admin/model/sales.dart';
 import 'package:amazon_clone/models/Order.dart';
 import 'package:amazon_clone/models/product.dart';
-import 'package:flutter/material.dart';
-import 'package:cloudinary_public/cloudinary_public.dart';
-import 'package:http/http.dart' as http;
 import 'package:amazon_clone/providers/user_provider.dart';
+import 'package:cloudinary_public/cloudinary_public.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminService {
   var userprovider = UserProvider();
@@ -47,12 +48,14 @@ class AdminService {
         images: imgUrls,
         category: category,
       );
-
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      final token = sharedPreferences.getString('x-auth-token') ?? "";
       http.Response res = await http.post(
         Uri.parse('$uri/admin/add-product'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': UserProvider().user.token,
+          'x-auth-token': token,
         },
         body: product.toJson(),
       );
@@ -71,13 +74,14 @@ class AdminService {
   }
 
   Future<List<Product>> fetchAllProducts(BuildContext context) async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<Product> productList = [];
     try {
-      http.Response res =
-          await http.get(Uri.parse('$uri/admin/get-products'), headers: {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      final token = sharedPreferences.getString('x-auth-token') ?? "";
+      http.Response res = await http.get(Uri.parse('$uri/admin'), headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        'x-auth-token': userProvider.user.token,
+        'x-auth-token': token,
       });
 
       httpErrorHandler(

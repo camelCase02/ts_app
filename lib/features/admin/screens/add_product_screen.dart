@@ -50,6 +50,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       images = res;
     });
   }
+
   void sellProducts() {
     if (_addProductFormKey.currentState!.validate() && images.isNotEmpty) {
       AdminService().sellProduct(
@@ -71,8 +72,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
           preferredSize: const Size.fromHeight(50),
           child: AppBar(
               flexibleSpace: Container(
-                decoration: const BoxDecoration(
-                    color: GlobalVariables.appBarGradient),
+                decoration:
+                    const BoxDecoration(color: GlobalVariables.appBarGradient),
               ),
               title: const Text(
                 "Add a new product",
@@ -178,8 +179,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                CustomButton(onTap: 
-                    sellProducts, text: "Ready to sell!")
+                CustomButton(onTap: sellProducts, text: "Ready to sell!")
               ],
             ),
           ),

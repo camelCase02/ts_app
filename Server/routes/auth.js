@@ -60,7 +60,6 @@ authRouter.post('/api/signin', async (req, res) => {
 
    }
 })
-//login route 
 
 
 authRouter.post('/tokenIsValid', async (req, res) => {
