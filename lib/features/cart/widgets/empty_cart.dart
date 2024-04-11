@@ -14,7 +14,7 @@ class EmptyCart extends StatelessWidget {
           child: Row(
             children: [
               Image.asset(
-                'assets/images/empty_cart.png',
+                'assets/amazon_in.png',
                 width: 120,
                 height: 120,
               ),
