@@ -42,6 +42,7 @@ class _AuthScreenState extends State<AuthScreen> {
         context: context,
         email: emailController.text,
         name: nameController.text,
+        type: userTypeController.text,
         password: passwordController.text);
   }
 
