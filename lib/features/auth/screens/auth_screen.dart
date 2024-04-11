@@ -38,16 +38,15 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void createAccountforUser() {
-    authService.createAccount(
+    authService.signUpUser(
         context: context,
         email: emailController.text,
         name: nameController.text,
-        type: userTypeController.text,
         password: passwordController.text);
   }
 
   void loginforUser() {
-    authService.loginUser(
+    authService.singInUser(
         email: emailController.text,
         context: context,
         password: passwordController.text);

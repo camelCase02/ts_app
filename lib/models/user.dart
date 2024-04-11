@@ -1,3 +1,5 @@
+
+import 'dart:async';
 import 'dart:convert';
 
 class User {
@@ -10,7 +12,6 @@ class User {
   final String token;
   final List<dynamic> cart;
 
-
   User(
       {required this.id,
       required this.name,
@@ -19,8 +20,7 @@ class User {
       required this.type,
       required this.email,
       required this.token,
-      required this.cart,
-});
+      required this.cart,});
 
   // Convert a User into a JSON-formatted map.
   Map<String, dynamic> toMap() {
@@ -33,7 +33,6 @@ class User {
       'type': type,
       'token': token,
       'cart': cart,
-
     };
   }
 
@@ -47,11 +46,7 @@ class User {
       address: map['address'] ?? "",
       type: map['type'] ?? "",
       token: map['token'] ?? "",
-      cart: List<Map<String, dynamic>>.from(
-        map['cart']?.map(
-          (x) => Map<String, dynamic>.from(x),
-        ),
-      ),
+      cart: map['cart'] ?? [],
     );
   }
 
@@ -59,7 +54,7 @@ class User {
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
 
-  User copyWith({
+    User copyWith({
     String? id,
     String? name,
     String? email,

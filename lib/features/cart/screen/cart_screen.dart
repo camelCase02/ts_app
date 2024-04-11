@@ -27,7 +27,7 @@ class _CartScreenState extends State<CartScreen> {
     int sum = 0;
     user.cart
         .map(((e) => sum += e['quantity'] * e['product']['price'] as int))
-        .toList();
+        ;
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(60),
