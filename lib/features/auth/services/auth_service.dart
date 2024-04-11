@@ -52,22 +52,22 @@
 //     }
 //   }
 
-  // void logoutUser({required BuildContext context}) async {
-  //   try {
-  //     SharedPreferences sharedPreferences =
-  //         await SharedPreferences.getInstance();
-  //     await sharedPreferences.setString('x-auth-token', "");
-  //     Navigator.pushAndRemoveUntil(
-  //         context,
-  //         generateRoute(
-  //           const RouteSettings(name: AuthScreen.routeName),
-  //         ),
-  //         (route) => false);
-  //     // }
-  //   } catch (e) {
-  //     showSnackBar(context, e.toString());
-  //   }
-  // }
+// void logoutUser({required BuildContext context}) async {
+//   try {
+//     SharedPreferences sharedPreferences =
+//         await SharedPreferences.getInstance();
+//     await sharedPreferences.setString('x-auth-token', "");
+//     Navigator.pushAndRemoveUntil(
+//         context,
+//         generateRoute(
+//           const RouteSettings(name: AuthScreen.routeName),
+//         ),
+//         (route) => false);
+//     // }
+//   } catch (e) {
+//     showSnackBar(context, e.toString());
+//   }
+// }
 
 //   void loginUser({
 //     required String email,
@@ -81,80 +81,76 @@
 //         headers: <String, String>{
 //           'Content-Type': 'application/json; charset=UTF-8',
 //         },
-//       ); 
-      
+//       );
 
-  //     httpErrorHandler(
-  //         response: res,
-  //         context: context,
-  //         onSuccess: () async {
-  //           SharedPreferences sharedPreferences =
-  //               await SharedPreferences.getInstance();
+//     httpErrorHandler(
+//         response: res,
+//         context: context,
+//         onSuccess: () async {
+//           SharedPreferences sharedPreferences =
+//               await SharedPreferences.getInstance();
 
-  //           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
-  //           final user = jsonDecode(res.body);
-  //           await sharedPreferences.setString('x-auth-token', user['token']);
-  //           if (user["type"] == "admin") {
-  //             Navigator.pushAndRemoveUntil(
-  //                 context,
-  //                 generateRoute(
-  //                   const RouteSettings(name: AdminScreen.routeName),
-  //                 ),
-  //                 (route) => false);
-  //           } else {
-  //             Navigator.pushAndRemoveUntil(
-  //                 context,
-  //                 generateRoute(
-  //                   const RouteSettings(name: HomeScreen.routeName),
-  //                 ),
-  //                 (route) => false);
-  //           }
-  //         });
-  //   } catch (e) {
-  //     showSnackBar(context, e.toString());
-  //   }
-  // }
-
-// //get user Data
-  // Future<void> getUserData(
-  //   BuildContext context,
-  // ) async {
-  //   print("IN_FETCH_USER_DATA");
-  //   try {
-  //     SharedPreferences preferences = await SharedPreferences.getInstance();
-  //     String? token = preferences.getString('x-auth-token');
-  //     if (token == null) {
-  //       preferences.setString('x-auth-token', '');
-  //     }
-
-  //     var tokenRes = await http.post(Uri.parse("$uri/tokenIsValid"),
-  //         headers: <String, String>{
-  //           'Content-Type': 'application/json; charset=UTF-8',
-  //           'x-auth-token': token!
-  //         });
-
-  //     var response = jsonDecode(tokenRes.body);
-  //     print(response);
-  //     if (response == true) {
-  //       http.Response userRes = await http.get(Uri.parse("$uri/"),
-  //           headers: <String, String>{
-  //             'Content-Type': 'application/json; charset=UTF-8',
-  //             'x-auth-token': token
-  //           });
-  //       var userProvider = Provider.of<UserProvider>(context, listen: false);
-  //       userProvider.setUser(userRes.body);
-  //     }
-  //   } catch (e) {
-  //     showSnackBar(context, e.toString());
-  //   }
-  // }
+//           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+//           final user = jsonDecode(res.body);
+//           await sharedPreferences.setString('x-auth-token', user['token']);
+//           if (user["type"] == "admin") {
+//             Navigator.pushAndRemoveUntil(
+//                 context,
+//                 generateRoute(
+//                   const RouteSettings(name: AdminScreen.routeName),
+//                 ),
+//                 (route) => false);
+//           } else {
+//             Navigator.pushAndRemoveUntil(
+//                 context,
+//                 generateRoute(
+//                   const RouteSettings(name: HomeScreen.routeName),
+//                 ),
+//                 (route) => false);
+//           }
+//         });
+//   } catch (e) {
+//     showSnackBar(context, e.toString());
+//   }
 // }
 
+// //get user Data
+// Future<void> getUserData(
+//   BuildContext context,
+// ) async {
+//   print("IN_FETCH_USER_DATA");
+//   try {
+//     SharedPreferences preferences = await SharedPreferences.getInstance();
+//     String? token = preferences.getString('x-auth-token');
+//     if (token == null) {
+//       preferences.setString('x-auth-token', '');
+//     }
+
+//     var tokenRes = await http.post(Uri.parse("$uri/tokenIsValid"),
+//         headers: <String, String>{
+//           'Content-Type': 'application/json; charset=UTF-8',
+//           'x-auth-token': token!
+//         });
+
+//     var response = jsonDecode(tokenRes.body);
+//     print(response);
+//     if (response == true) {
+//       http.Response userRes = await http.get(Uri.parse("$uri/"),
+//           headers: <String, String>{
+//             'Content-Type': 'application/json; charset=UTF-8',
+//             'x-auth-token': token
+//           });
+//       var userProvider = Provider.of<UserProvider>(context, listen: false);
+//       userProvider.setUser(userRes.body);
+//     }
+//   } catch (e) {
+//     showSnackBar(context, e.toString());
+//   }
+// }
+// }
 
 import 'dart:convert';
 
-
-import 'package:amazon_clone/componments/botton_bar.dart';
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_veriables.dart';
 import 'package:amazon_clone/constants/utilis.dart';
@@ -175,6 +171,7 @@ class AuthService {
       {required BuildContext context,
       required String email,
       required String password,
+      required String type,
       required String name}) async {
     try {
       User user = User(
@@ -183,7 +180,7 @@ class AuthService {
         email: email,
         password: password,
         address: '',
-        type: '',
+        type: type,
         token: '',
         cart: [],
       );
@@ -226,7 +223,7 @@ class AuthService {
         },
       );
 
-       httpErrorHandler(
+      httpErrorHandler(
           response: res,
           context: context,
           onSuccess: () async {
@@ -236,6 +233,7 @@ class AuthService {
             Provider.of<UserProvider>(context, listen: false).setUser(res.body);
             final user = jsonDecode(res.body);
             await sharedPreferences.setString('x-auth-token', user['token']);
+            UserProvider().user.token = user['token'];
             if (user["type"] == "admin") {
               Navigator.pushAndRemoveUntil(
                   context,
@@ -256,9 +254,9 @@ class AuthService {
       showSnackBar(context, e.toString());
     }
   }
-  
 
   void logoutUser({required BuildContext context}) async {
+    print("IN LOGOUT");
     try {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
@@ -274,9 +272,10 @@ class AuthService {
       showSnackBar(context, e.toString());
     }
   }
+
   // get user data
-   Future<void> getUserData(
-   BuildContext context,
+  Future<void> getUserData(
+    BuildContext context,
   ) async {
     print("IN_FETCH_USER_DATA");
     try {
@@ -306,5 +305,5 @@ class AuthService {
     } catch (e) {
       showSnackBar(context, e.toString());
     }
-  }}
-
+  }
+}
