@@ -36,7 +36,6 @@ class _AdminScreenState extends State<AdminScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("IN ADMIN SCREEN!!");
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _page,

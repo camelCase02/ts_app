@@ -1,4 +1,3 @@
-
 import 'package:amazon_clone/features/admin/screens/add_product_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,20 +9,27 @@ class PostsScreen extends StatefulWidget {
 }
 
 class _PostsScreenState extends State<PostsScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
-  void navigateToAddProduct(){
+  void navigateToAddProduct() {
     Navigator.pushNamed(context, AddProductScreen.routeName);
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body: const Center(child: Text("Products"),),
-      floatingActionButton: FloatingActionButton(onPressed: navigateToAddProduct, 
-      tooltip: "Neues Produkt hochladen",
-      child: const Icon(Icons.addchart_rounded),
-      
-      ),floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      
-      );
+    return Scaffold(
+      body: const Center(
+        child: Text("Products"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: navigateToAddProduct,
+        tooltip: "Add a new product",
+        child: const Icon(Icons.addchart_rounded),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 }

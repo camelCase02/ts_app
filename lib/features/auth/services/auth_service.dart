@@ -24,7 +24,6 @@ class AuthService {
     required String type,
     required String password,
   }) async {
-    print("Got it!! in createAccount in auth service");
     try {
       User user = User(
           id: "",
