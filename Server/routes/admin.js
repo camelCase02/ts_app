@@ -24,6 +24,7 @@ adminRouter.post("/admin/add-product", auth, async function (req, res) {
         res.status(500).json({ error: e.message + " Something went wrong" })
     }
 })
+
 adminRouter.get("/admin", auth, async function (req, res) {
     try {
         let products = await Product.find({ userId: req.user });

@@ -7,8 +7,8 @@ import 'package:amazon_clone/models/product.dart';
 import 'package:amazon_clone/models/user.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class ProductServices {
   void addToCart({
@@ -19,7 +19,7 @@ class ProductServices {
 
     try {
       http.Response res = await http.post(
-        Uri.parse('$uri/api/add-to-cart'),
+        Uri.parse('$uri/api/cart/add'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': userProvider.user.token,
@@ -28,7 +28,7 @@ class ProductServices {
           'id': product.id!,
         }),
       );
-
+      print(res.body.toString());
       httpErrorHandler(
         response: res,
         context: context,
@@ -36,6 +36,7 @@ class ProductServices {
           User user =
               userProvider.user.copyWith(cart: jsonDecode(res.body)['cart']);
           userProvider.setUserFromModel(user);
+          showSnackBar(context, "Added to Cart!");
         },
       );
     } catch (e) {
@@ -50,12 +51,15 @@ class ProductServices {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     try {
-      http.Response res = await http.delete(
-        Uri.parse('$uri/api/remove-from-cart/${product.id}'),
+      http.Response res = await http.post(
+        Uri.parse('$uri/api/cart/remove'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': userProvider.user.token,
         },
+        body: jsonEncode({
+          'id': product.id!,
+        }),
       );
 
       httpErrorHandler(
@@ -65,6 +69,7 @@ class ProductServices {
           User user =
               userProvider.user.copyWith(cart: jsonDecode(res.body)['cart']);
           userProvider.setUserFromModel(user);
+          showSnackBar(context, "Removed from cart!");
         },
       );
     } catch (e) {
@@ -77,26 +82,27 @@ class ProductServices {
     required Product product,
     required double rating,
   }) async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    // final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     try {
-      http.Response res = await http.post(
-        Uri.parse('$uri/api/rate-product'),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': userProvider.user.token,
-        },
-        body: jsonEncode({
-          'id': product.id!,
-          'rating': rating,
-        }),
-      );
-
-      httpErrorHandler(
-        response: res,
-        context: context,
-        onSuccess: () {},
-      );
+      showSnackBar(context, "Thanks for Rating the product!!");
+      // http.Response res = await http.post(
+      //   Uri.parse('$uri/api/rate-product'),
+      //   headers: {
+      //     'Content-Type': 'application/json; charset=UTF-8',
+      //     'x-auth-token': userProvider.user.token,
+      //   },
+      //   body: jsonEncode({
+      //     'id': product.id!,
+      //     'rating': rating,
+      //   }),
+      // );
+      //
+      // httpErrorHandler(
+      //   response: res,
+      //   context: context,
+      //   onSuccess: () {},
+      // );
     } catch (e) {
       showSnackBar(context, e.toString());
     }
