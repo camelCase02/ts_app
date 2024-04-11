@@ -11,17 +11,21 @@ class AddressBox extends StatelessWidget {
     return Container(
       height: 40,
       decoration: const BoxDecoration(
-          gradient: LinearGradient(colors: [
-        Color.fromARGB(255, 114, 226, 221),
-        Color.fromARGB(255, 162, 236, 233)
-      ])),
+        color: Color.fromARGB(255, 107, 219, 206),
+      ),
       child:  Padding(
         padding: const EdgeInsets.only(left: 10),
         child: Row(children: [
-          const Icon(Icons.location_on_outlined, size:20 ,),
+          const Icon(Icons.location_on, size:20 ,),
           Expanded(child: Padding(
             padding: const EdgeInsets.only(left: 5),
-            child: Text("Lieferung zu ${user.user.name} in ${user.user.address}", overflow: TextOverflow.ellipsis),
+            child: Row(
+              children: [
+                Text("Deliver to ${user.user.name} ", overflow: TextOverflow.ellipsis),
+                const Spacer(),
+                Text( "${user.user.address}", overflow: TextOverflow.ellipsis),
+              ],
+            ),
           )),
           const Padding(
             padding: EdgeInsets.all(5.0),

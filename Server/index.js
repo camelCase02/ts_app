@@ -1,7 +1,7 @@
 // IMPORT from Packages
 const express = require('express');
 const cors = require('cors');
-const { env_db } = require('../.env.js');
+//const { env_db } = require('config.env.js');
   // Ensure the path './env' points correctly to the env.js file
 
 const mongoose = require("mongoose");
@@ -13,7 +13,7 @@ const authRouter = require("./routes/auth");
 
 // INIT
 const Port = 3000;
-const DB = env_db;
+const DB = 'mongodb+srv://abhkum75:Abhay1393@atlascluster.vhfyayp.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster';
 console.log("DB");
 console.log(DB);
 console.log("DB");

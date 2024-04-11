@@ -74,14 +74,13 @@ class AuthService {
     required String password,
   }) async {
     try {
-      http.Response res = await http.post(Uri.parse("$uri/api/signin"),
-          body: jsonEncode({
-            'email': email,
-            'password': password,
-          }),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8'
-          });
+      http.Response res = await http.post(
+        Uri.parse('$uri/api/login'),
+        body: jsonEncode({'email': email, 'password': password}),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
 
       httpErrorHandler(
           response: res,
@@ -148,3 +147,5 @@ class AuthService {
     }
   }
 }
+
+

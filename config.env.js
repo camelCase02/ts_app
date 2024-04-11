@@ -1,0 +1,1 @@
+DB_STRING = 'mongodb+srv://abhkum75:Abhay1393@atlascluster.vhfyayp.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster'

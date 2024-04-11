@@ -17,7 +17,7 @@ class AccountScreen extends StatelessWidget {
           child: AppBar(
             flexibleSpace: Container(
               decoration:
-                  const BoxDecoration(gradient: GlobalVariables.appBarGradient),
+                  const BoxDecoration(color: GlobalVariables.appBarGradient),
             ),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
