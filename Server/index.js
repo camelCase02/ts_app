@@ -1,5 +1,6 @@
 // IMPORT from Packages
 const express = require('express');
+const cors = require('cors');
 const { env_db } = require('../.env.js');
   // Ensure the path './env' points correctly to the env.js file
 
@@ -9,15 +10,20 @@ require('dotenv').config();  // Load environment variables from .env file
 // Import from other files
 const authRouter = require("./routes/auth");
 
+
 // INIT
 const Port = 3000;
 const DB = env_db;
+console.log("DB");
+console.log(DB);
+console.log("DB");
  // Assuming you named it DB_STRING in your .env file
 const app = express();
 
 // middleware
 app.use(express.json())
 app.use(authRouter);
+app.use(cors());
 
 // CLIENT -> SERVER-> CLIENT
 

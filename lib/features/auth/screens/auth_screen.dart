@@ -7,6 +7,8 @@ import '../../../componments/customer_button.dart';
 
 enum Auth { login, createAccount }
 
+enum UserType { admin, user }
+
 class AuthScreen extends StatefulWidget {
   static const String routeName = '/auth-screen';
   const AuthScreen({super.key});
@@ -17,11 +19,14 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.createAccount;
+  UserType _userType = UserType.user;
   final createAccountFormKey = GlobalKey<FormState>();
   final loginFormKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController userTypeController =
+      TextEditingController(text: "user");
   final AuthService authService = AuthService();
 
   @override
@@ -37,6 +42,7 @@ class _AuthScreenState extends State<AuthScreen> {
         context: context,
         email: emailController.text,
         name: nameController.text,
+        type: userTypeController.text,
         password: passwordController.text);
   }
 
@@ -66,7 +72,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   ? GlobalVariables.backgroundColor
                   : GlobalVariables.greyBackgroundCOlor,
               title: const Text(
-                "create Account",
+                "Create Account",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               leading: Radio(
@@ -98,6 +104,49 @@ class _AuthScreenState extends State<AuthScreen> {
                       CustomTextfield(
                         controller: passwordController,
                         hintText: "password....",
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Row(
+                          children: [
+                            Radio(
+                              activeColor: GlobalVariables.secondaryColor,
+                              value: UserType.admin,
+                              groupValue: _userType,
+                              onChanged: (UserType? value) {
+                                if (value == null) return;
+                                if (value == UserType.admin) {
+                                  setState(() {
+                                    userTypeController.text = "admin";
+                                    _userType = value;
+                                  });
+                                }
+                              },
+                            ),
+                            const Text(
+                              "Admin Account",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Radio(
+                              activeColor: GlobalVariables.secondaryColor,
+                              value: UserType.user,
+                              groupValue: _userType,
+                              onChanged: (UserType? value) {
+                                if (value == null) return;
+                                if (value == UserType.user) {
+                                  setState(() {
+                                    userTypeController.text = "user";
+                                    _userType = value;
+                                  });
+                                }
+                              },
+                            ),
+                            const Text(
+                              "Consumer Account",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),

@@ -12,26 +12,28 @@ class BottonBar extends StatefulWidget {
 }
 
 class _BottonBarState extends State<BottonBar> {
-   int _page = 0;
+  int _page = 0;
   final double bottonBarWidth = 42;
   final double bottonBarBorderWidth = 5;
 
-List<Widget>pages= [
-const HomeScreen(),
-   const AccountScreen(),
-   const Center(child: Text("Card"),)
-];
+  List<Widget> pages = [
+    const HomeScreen(),
+    const AccountScreen(),
+    const Center(
+      child: Text("Card"),
+    )
+  ];
 
-
-  void updatePage(int page){
+  void updatePage(int page) {
     setState(() {
-      _page=page;
+      _page = page;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: pages[_page],
+    return Scaffold(
+      body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _page,
         selectedItemColor: GlobalVariables.selectedNavBarColor,
@@ -42,50 +44,53 @@ const HomeScreen(),
         items: [
           BottomNavigationBarItem(
               icon: Container(
-            width: bottonBarWidth,
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                    color: _page == 0
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor, 
+                width: bottonBarWidth,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                        color: _page == 0
+                            ? GlobalVariables.selectedNavBarColor
+                            : GlobalVariables.backgroundColor,
                         width: bottonBarBorderWidth),
+                  ),
+                ),
+                child: const Icon(Icons.home_outlined),
               ),
-            ),
-            child: const Icon(Icons.home_outlined),
-            
-          ), label: "Home"),
+              label: "Home"),
           BottomNavigationBarItem(
               icon: Container(
-            width: bottonBarWidth,
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                    color: _page == 1
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor, 
+                width: bottonBarWidth,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                        color: _page == 1
+                            ? GlobalVariables.selectedNavBarColor
+                            : GlobalVariables.backgroundColor,
                         width: bottonBarBorderWidth),
+                  ),
+                ),
+                child: const Icon(Icons.person_outline_outlined),
               ),
-            ),
-            child: const Icon(Icons.person_outline_outlined),
-            
-          ), label: ""),
+              label: ""),
           BottomNavigationBarItem(
               icon: Container(
-            width: bottonBarWidth,
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                    color: _page == 2
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor, 
+                width: bottonBarWidth,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                        color: _page == 2
+                            ? GlobalVariables.selectedNavBarColor
+                            : GlobalVariables.backgroundColor,
                         width: bottonBarBorderWidth),
+                  ),
+                ),
+                child: const Badge(
+                    label: Text("2"),
+                    backgroundColor: Colors.white,
+                    textColor: Colors.black,
+                    child: Icon(Icons.shopping_cart_outlined)),
               ),
-            ),
-            child: const Badge(label: Text("2" ),backgroundColor: Colors.white,textColor: Colors.black,
-              child: Icon(Icons.shopping_cart_outlined)),
-            
-          ), label: "")
+              label: "")
         ],
       ),
     );
