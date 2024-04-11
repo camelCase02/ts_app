@@ -247,7 +247,7 @@ class AuthService {
               Navigator.pushAndRemoveUntil(
                   context,
                   generateRoute(
-                    const RouteSettings(name: HomeScreen.routeName),
+                    const RouteSettings(name: BottonBar.routeName),
                   ),
                   (route) => false);
             }

@@ -142,7 +142,7 @@ class _AdminScreenState extends State<AdminScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            //authService.logoutUser(context: context);
+                            authService.logoutUser(context: context);
                           },
                           child: const Text("Yes"),
                         ),

@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 
 class AdminService {
   var userprovider = UserProvider();
-  void sellProducts({
+  void sellProduct({
     required BuildContext context,
     required String name,
     required String description,
@@ -24,21 +24,27 @@ class AdminService {
     required String category,
     required List<File> images,
   }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
-      final cloudiary = CloudinaryPublic('df7v8b90n', 'ycjyycds');
-      List<String> imageUrl = [];
-      for (int i = 0; i < images.length; i++) {
-        CloudinaryResponse res = await cloudiary
-            .uploadFile(CloudinaryFile.fromFile(images[i].path, folder: name));
-        imageUrl.add(res.secureUrl);
-      }
+      final cloudinary = CloudinaryPublic('df7v8b90n', 'ycjyycds');
+      List<String> imgUrls = [];
 
+      for (int i = 0; i < images.length; i++) {
+        CloudinaryResponse res = await cloudinary.uploadFile(
+          CloudinaryFile.fromFile(
+            images[i].path,
+            resourceType: CloudinaryResourceType.Image,
+            folder: name,
+          ),
+        );
+        imgUrls.add(res.secureUrl);
+      }
       Product product = Product(
         name: name,
         description: description,
         quantity: quantity,
         price: price,
-        images: imageUrl,
+        images: imgUrls,
         category: category,
       );
 
@@ -46,7 +52,7 @@ class AdminService {
         Uri.parse('$uri/admin/add-product'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': userprovider.user.token,
+          'x-auth-token': UserProvider().user.token,
         },
         body: product.toJson(),
       );
@@ -63,6 +69,7 @@ class AdminService {
       showSnackBar(context, e.toString());
     }
   }
+
   Future<List<Product>> fetchAllProducts(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<Product> productList = [];
