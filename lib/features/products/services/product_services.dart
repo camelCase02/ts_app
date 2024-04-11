@@ -51,12 +51,15 @@ class ProductServices {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     try {
-      http.Response res = await http.delete(
-        Uri.parse('$uri/api/remove-from-cart/${product.id}'),
+      http.Response res = await http.post(
+        Uri.parse('$uri/api/cart/remove'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': userProvider.user.token,
         },
+        body: jsonEncode({
+          'id': product.id!,
+        }),
       );
 
       httpErrorHandler(
@@ -66,6 +69,7 @@ class ProductServices {
           User user =
               userProvider.user.copyWith(cart: jsonDecode(res.body)['cart']);
           userProvider.setUserFromModel(user);
+          showSnackBar(context, "Removed from cart!");
         },
       );
     } catch (e) {

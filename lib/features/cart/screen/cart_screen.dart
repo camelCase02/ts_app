@@ -10,6 +10,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/product.dart';
+import '../../address/screen/address_screen.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -24,27 +25,32 @@ class _CartScreenState extends State<CartScreen> {
   Map<String, Product> productMap = {};
   late int totalSum;
   void navigateToAddress(int sum) {
-    // Navigator.pushNamed(context, Address.routeName,
-    //     arguments: sum.toString());
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddressScreen(sum: totalSum),
+      ),
+    );
   }
+
   Future<void> getCartData() async {
     productMap.clear();
     userCart.clear();
     final user = context.watch<UserProvider>().user;
     int sum = 0;
+    print(user.cart);
     for (var element in user.cart) {
       final prod = await homeService.fetchProductById(
           context: context, id: element['productId']);
+
       if (prod != null) {
         productMap[prod.id!] = prod;
         userCart.add({
           prod: element['quantity'],
         });
+        sum += (element['quantity'] * prod.price).round() as int;
       }
     }
-    user.cart.map(
-      ((e) => sum += e['quantity'] * productMap[e['productId']]!.price as int),
-    );
     totalSum = sum;
   }
 
@@ -78,11 +84,14 @@ class _CartScreenState extends State<CartScreen> {
               : Column(
                   children: [
                     const AddressBox(),
-                    const CartSubtotal(),
+                    CartSubtotal(
+                      sum: totalSum,
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CustomButton(
-                        text: 'Proceed to Buy (${userCart.length} items)',
+                        text:
+                            'Proceed to Buy (${userCart.length} item${(userCart.length == 1) ? "" : "s"})',
                         onTap: () => navigateToAddress(totalSum),
                       ),
                     ),

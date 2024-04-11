@@ -138,4 +138,17 @@ class HomeServices {
     }
     return product;
   }
+
+  Future<void> orderComplete({
+    required BuildContext context,
+  }) async {
+    try {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.user.cart.clear();
+      //make a request to clear in db
+      showSnackBar(context, "Order Placed!");
+    } catch (e) {
+      showSnackBar(context, "ERROR Occured: Cannot place order.");
+    }
+  }
 }

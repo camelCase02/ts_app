@@ -78,6 +78,25 @@ userSchema.methods.addToCart = async function (productId) {
     }
 };
 
+userSchema.methods.removeFromCart = async function (productId) {
+    try {
+        // Check if the product exists in the cart
+        const existingProductIndex = this.cart.findIndex(item => item.productId.equals(productId));
+
+        if (existingProductIndex !== -1) {
+            this.cart[existingProductIndex].quantity -= 1;
+            if (this.cart[existingProductIndex].quantity <= 0) {
+                this.cart.splice(existingProductIndex, 1);
+            }
+        }
+
+        await this.save();
+        return { success: true, message: "Product removed from cart successfully" };
+    } catch (error) {
+        return { success: false, message: error.message };
+    }
+};
+
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
