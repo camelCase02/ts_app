@@ -5,7 +5,6 @@ import 'package:amazon_clone/features/home/widgets/featured_products.dart';
 import 'package:amazon_clone/features/home/widgets/top_categories.dart';
 import 'package:flutter/material.dart';
 
-
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/HomeScreen";
   const HomeScreen({super.key});
@@ -16,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final AuthService authService = AuthService();
+  String selectedCategory = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
             preferredSize: const Size.fromHeight(70),
             child: AppBar(
               flexibleSpace: Container(
-                decoration: const BoxDecoration(
-                    color: GlobalVariables.appBarGradient),
+                decoration:
+                    const BoxDecoration(color: GlobalVariables.appBarGradient),
               ),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,45 +40,45 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(16),
                         child: TextFormField(
                           decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.black, width: 1),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(16),
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.black, width: 1),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(16),
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: const EdgeInsets.only(top: 10),
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(16),
+                              ),
+                            ),
+                            suffixIcon: InkWell(
+                              onTap: () {},
+                              child: const Padding(
+                                padding: EdgeInsets.only(left: 6),
+                                child: Icon(
+                                  Icons.mic,
+                                  color: Colors.black,
+                                  size: 23,
                                 ),
                               ),
-                              filled: true,
-                              fillColor: Colors.white,
-                              contentPadding: const EdgeInsets.only(top: 10),
-                              border: const OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(16),
+                            ),
+                            prefixIcon: InkWell(
+                              onTap: () {},
+                              child: const Padding(
+                                padding: EdgeInsets.only(left: 6),
+                                child: Icon(
+                                  Icons.search,
+                                  color: Colors.black,
+                                  size: 23,
                                 ),
                               ),
-                              suffixIcon: InkWell(
-                                onTap: () {},
-                                child: const Padding(
-                                  padding: EdgeInsets.only(left: 6),
-                                  child: Icon(
-                                    Icons.mic,
-                                    color: Colors.black,
-                                    size: 23,
-                                  ),
-                                ),
-                              ),
-                              prefixIcon: InkWell(
-                                onTap: () {},
-                                child: const Padding(
-                                  padding: EdgeInsets.only(left: 6),
-                                  child: Icon(
-                                    Icons.search,
-                                    color: Colors.black,
-                                    size: 23,
-                                  ),
-                                ),
-                              ),
-                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -125,19 +125,28 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             )),
-        body: const SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
+        body: SingleChildScrollView(
           child: Column(
             children: [
-              AddressBox(),
-              SizedBox(
+              const AddressBox(),
+              const SizedBox(
                 height: 10,
               ),
-              TopCategories(),
-              SizedBox(
+              TopCategories(
+                onCategorySelected: (category) {
+                  setState(() {
+                    if (category == selectedCategory) {
+                      selectedCategory = "";
+                    } else {
+                      selectedCategory = category;
+                    }
+                  });
+                },
+              ),
+              const SizedBox(
                 height: 10,
               ),
-              FeaturedProducts(),
+              FeaturedProducts(selectedCategory: selectedCategory),
               //CrauselImage(),
               //DealOfDay()
             ],

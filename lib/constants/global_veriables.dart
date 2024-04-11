@@ -28,11 +28,11 @@ class GlobalVariables {
       'image': 'assets/irrigation.png',
     },
     {
-      'title': 'Fertilizers',
+      'title': 'Fertilizer',
       'image': 'assets/fertilizers.png',
     },
     {
-      'title': 'Seeds',
+      'title': 'Seed',
       'image': 'assets/seed.png',
     },
     {
@@ -40,7 +40,7 @@ class GlobalVariables {
       'image': 'assets/gear.png',
     },
     {
-      'title': 'Feed',
+      'title': 'Livestock Feed',
       'image': 'assets/livestock_feed.png',
     },
   ];

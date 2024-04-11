@@ -1,9 +1,13 @@
 import 'package:amazon_clone/features/home/services/home_services.dart';
+import 'package:amazon_clone/features/products/screens/product_details_screen.dart';
 import 'package:amazon_clone/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class FeaturedProducts extends StatefulWidget {
-  const FeaturedProducts({super.key});
+  final String? selectedCategory;
+
+  const FeaturedProducts({Key? key, this.selectedCategory}) : super(key: key);
 
   @override
   State<FeaturedProducts> createState() => _FeaturedProductsState();
@@ -12,118 +16,95 @@ class FeaturedProducts extends StatefulWidget {
 class _FeaturedProductsState extends State<FeaturedProducts> {
   final HomeServices homeServices = HomeServices();
 
-  List<Product>? product;
-  List<String> image = [
-    "assets/pesticide.png",
-    "assets/nutrient.png",
-    "assets/wheat.png",
-    "assets/hummer.png"
-    "assets/pesticide.png",
-  ];
-  List<String> name = [
-    "Bloom Buddy Organic Pesticide",
-    "BloomField Crop Nutrient",
-    "Godavari Wheat Seeds- 2Kg",
-    "BloomField Crop Nutrient",
-    "Godavari Wheat Seeds- 2Kg",
+  late List<Product> product;
 
-  ];
-  List<String> description = [
-    "B jjds cndc cnne",
-    "Blcndjncnc cjdncnt",
-    "Gcdjncjnc ccg",
-    "Blocdjncjndc ient",
-        "Blocdjncjndc ient"
-
-  ];
-  List<String> price = ["20", "10", "58", "20","20"];
-
-  @override
-  void initState() {
-    super.initState();
-    fetchFeaturedProducts();
-  }
-
-  fetchFeaturedProducts() async {
-    product = await homeServices.fetchProducts(context: context);
-    setState(() {});
+  Future<void> fetchFeaturedProducts() async {
+    if (widget.selectedCategory == '') {
+      product = await homeServices.fetchProducts(context: context);
+    } else {
+      product = await homeServices.fetchCategoryProducts(
+          context: context, category: widget.selectedCategory!);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              "Featured Products",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          //product == null? const Text("No products listed"):
-          GridView.builder(
-            shrinkWrap: true,
-            itemCount: image.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, // Number of columns
-            ),
-            itemBuilder: (context, index) {
-              return Container(
-                color: Colors.white,
-                margin: const EdgeInsets.all(5),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: Image.asset(image[index])),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Text(name[index],
-                          style: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center),
-                    ),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: Text("₹" + "" + price[index])),
-                        const Spacer(),
-                        Expanded(
-                          flex: 3,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Text("Add"),
-                            style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStatePropertyAll(Color.fromARGB(142, 15, 238, 212))),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
+    return FutureBuilder(
+      future: fetchFeaturedProducts(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: Lottie.asset('assets/Animation.json'),
+          ); // or some loading screen
+        }
+
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        }
+        return Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: SizedBox(
+            width: double.infinity,
+            height: 600,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    widget.selectedCategory == ""
+                        ? "Featured Products"
+                        : widget.selectedCategory!,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 ),
-              );
-            },
+                const SizedBox(
+                  height: 10,
+                ),
+                product.isEmpty
+                    ? const Text("No products listed")
+                    : SizedBox(
+                        height: 300,
+                        width: double.infinity,
+                        child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2),
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => ProductDetailScreen(
+                                      product: product[index],
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(24)),
+                                child: Column(
+                                  children: [
+                                    Image.network(
+                                      product[index].images[0],
+                                      fit: BoxFit.fitHeight,
+                                      alignment: Alignment.center,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          itemCount: product.length,
+                        ),
+                      ),
+              ],
+            ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
