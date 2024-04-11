@@ -18,23 +18,25 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
     "assets/nutrient.png",
     "assets/wheat.png",
     "assets/hummer.png"
+    "assets/pesticide.png",
   ];
   List<String> name = [
     "Bloom Buddy Organic Pesticide",
     "BloomField Crop Nutrient",
     "Godavari Wheat Seeds- 2Kg",
-    "BloomField Crop Nutrient"
+    "BloomField Crop Nutrient",
+    "Godavari Wheat Seeds- 2Kg",
+
   ];
   List<String> description = [
     "B jjds cndc cnne",
     "Blcndjncnc cjdncnt",
     "Gcdjncjnc ccg",
-    "Blocdjncjndc ient"
-  ];
-  List<String> price= [
-    "20","10","58","20"
-  ];
+    "Blocdjncjndc ient",
+        "Blocdjncjndc ient"
 
+  ];
+  List<String> price = ["20", "10", "58", "20","20"];
 
   @override
   void initState() {
@@ -67,29 +69,54 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
           ),
           //product == null? const Text("No products listed"):
           GridView.builder(
-            physics: ScrollPhysics(),
-            scrollDirection: Axis.vertical,
             shrinkWrap: true,
             itemCount: image.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // Number of columns
+            ),
             itemBuilder: (context, index) {
               return Container(
-                height: 100,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
+                color: Colors.white,
+                margin: const EdgeInsets.all(5),
                 child: Column(
                   children: [
-                    Image.asset(image[index]),
-                    Text(name[index], style:const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),textAlign: TextAlign.center),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Image.asset(image[index])),
+                    const SizedBox(
+                      height: 7,
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Text(name[index],
+                          style: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center),
+                    ),
+                    const SizedBox(
+                      height: 7,
+                    ),
                     Row(
                       children: [
-                        Text("₹"+""+ price[index]),
-                        TextButton(onPressed: () {
-                        }, child: Text("Add"),style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFF023731))), )
+                        Expanded(
+                          flex: 2,
+                          child: Text("₹" + "" + price[index])),
+                        const Spacer(),
+                        Expanded(
+                          flex: 3,
+                          child: TextButton(
+                            onPressed: () {},
+                            child: Text("Add"),
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStatePropertyAll(Color.fromARGB(142, 15, 238, 212))),
+                          ),
+                        )
                       ],
                     ),
-
-
                   ],
                 ),
               );

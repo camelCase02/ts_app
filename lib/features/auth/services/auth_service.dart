@@ -151,6 +151,7 @@
 
 import 'dart:convert';
 
+import 'package:amazon_clone/componments/botton_bar.dart';
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_veriables.dart';
 import 'package:amazon_clone/constants/utilis.dart';

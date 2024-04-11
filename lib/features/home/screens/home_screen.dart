@@ -126,6 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             )),
         body: const SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
           child: Column(
             children: [
               AddressBox(),
