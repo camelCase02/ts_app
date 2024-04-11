@@ -14,6 +14,7 @@ import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 class AdminService {
+  var userprovider = UserProvider();
   void sellProducts({
     required BuildContext context,
     required String name,
@@ -45,7 +46,7 @@ class AdminService {
         Uri.parse('$uri/admin/add-product'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': UserProvider().user.token,
+          'x-auth-token': userprovider.user.token,
         },
         body: product.toJson(),
       );

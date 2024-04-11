@@ -25,7 +25,9 @@ class _PostsScreenState extends State<PostsScreen> {
         child: Text("Products"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: navigateToAddProduct,
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const AddProductScreen(),));
+        },
         tooltip: "Add a new product",
         child: const Icon(Icons.addchart_rounded),
       ),

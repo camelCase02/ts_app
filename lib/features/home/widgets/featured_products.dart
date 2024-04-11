@@ -17,10 +17,10 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
   @override
   void initState() {
     super.initState();
-    fetchDealOfDay();
+    fetchFeaturedProducts();
   }
 
-  fetchDealOfDay() async {
+  fetchFeaturedProducts() async {
     product = await homeServices.fetchProducts(context: context);
     setState(() {});
   }
@@ -48,9 +48,9 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
             itemBuilder: (context, index) {
               return Container(
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
-                child:const Column(
+                child: Column(
                   children: [
-                     
+                     Image.network(product![index].images[index], fit: BoxFit.fitHeight, alignment: Alignment.center,)
                   ],
                 ),
               );
