@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-String uri = "http://10.81.68.156:3000"; // change the IP ADDRESS !!
-//String uri = "http://10.81.15.40:3000"; // usman's IP
+// String uri = "http://10.81.68.156:3000"; // change the IP ADDRESS !!
+String uri = "http://10.81.15.40:3000"; // usman's IP
 
 //String uri= "http://localhost:3000";
 class GlobalVariables {
@@ -12,7 +12,6 @@ class GlobalVariables {
   static const Color greyBackgroundCOlor = Color(0xffebecee);
   static var selectedNavBarColor = Color(0xFF023731);
   static const unselectedNavBarColor = Colors.black87;
-
 
   static const List<Map<String, String>> categoryImages = [
     {

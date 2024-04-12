@@ -170,13 +170,6 @@ class HomeServices {
           body: order.toJson(),
         );
         print("after request!");
-        httpErrorHandler(
-          response: res,
-          context: context,
-          onSuccess: () {
-            showSnackBar(context, "Oder Placed for Product $i !");
-          },
-        );
       }
       user.cart.clear();
       print("Before Cart CLear!!");

@@ -38,11 +38,11 @@ class Order {
       id: map['_id'],
       productId: map['productId'],
       userId: map['userId'],
-      quantity: map['quantity'] as int,
+      quantity: map['quantity'].toInt(),
       orderedBy: map['orderedBy'],
       orderedAt: DateTime.parse(map['orderedAt']),
-      status: map['status']?.toInt() ?? 0,
-      totalPrice: map['totalPrice']?.toDouble() ?? 0.0,
+      status: map['status'] ?? "Pending",
+      totalPrice: map['totalPrice'].toInt() ?? 0,
     );
   }
 

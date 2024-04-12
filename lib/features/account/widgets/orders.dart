@@ -55,21 +55,24 @@ class _OrdersState extends State<Orders> {
         Container(
           height: 170,
           padding: const EdgeInsets.only(left: 10, top: 20, right: 0),
-          child: orders==null? Text("No orders"): ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: orders!.length,
-              itemBuilder: (context, index) {
-                return InkWell(
+          child: orders == null || orders!.isEmpty
+              ? Text("No orders")
+              : ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: orders!.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
                       onTap: () => Navigator.pushNamed(
                         context,
                         OrderDetailsScreen.routName,
                         arguments: orders![index],
                       ),
                       child: SingleProduct(
-                        image: orders![index].productId[0],
+                        image:
+                            "https://5.imimg.com/data5/SELLER/Default/2020/12/EH/ZL/PB/8762737/250-ml-hdpe-pesticide-bottle.jpg",
                       ),
                     );
-              }),
+                  }),
         )
       ],
     );
