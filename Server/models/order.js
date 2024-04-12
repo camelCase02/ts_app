@@ -10,6 +10,10 @@ const orderSchema = mongoose.Schema({
         type: Number,
         required: true
     },
+    userId: {
+        type: String,
+        required: true
+    },
     orderedBy: {
         type: String,
         required: true

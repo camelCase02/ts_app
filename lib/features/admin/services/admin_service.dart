@@ -105,6 +105,66 @@ class AdminService {
     return productList;
   }
 
+  Future<List<int>> fetchAnalytics(BuildContext context) async {
+    List<int> productList = [];
+    try {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+      http.Response res =
+          await http.get(Uri.parse('$uri/admin/analytics'), headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      });
+
+      httpErrorHandler(
+        response: res,
+        context: context,
+        onSuccess: () {
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
+            productList.add(
+              jsonDecode(res.body)[i],
+            );
+          }
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return productList;
+  }
+
+  Future<List<Order>> fetchOrders(BuildContext context) async {
+    List<Order> list = [];
+    try {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+      http.Response res =
+          await http.get(Uri.parse('$uri/admin/orders'), headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      });
+
+      httpErrorHandler(
+        response: res,
+        context: context,
+        onSuccess: () {
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
+            list.add(
+              Order.fromJson(
+                jsonEncode(
+                  jsonDecode(res.body)[i],
+                ),
+              ),
+            );
+          }
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return list;
+  }
+
   // delete product
   void deleteProduct({
     required BuildContext context,
