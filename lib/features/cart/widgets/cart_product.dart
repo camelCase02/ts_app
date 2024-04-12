@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:amazon_clone/features/products/services/product_services.dart';
-import 'package:amazon_clone/models/product.dart';
+import 'package:Agricon/features/products/services/product_services.dart';
+import 'package:Agricon/models/product.dart';
 import 'package:flutter/material.dart';
 
 class CartProduct extends StatefulWidget {

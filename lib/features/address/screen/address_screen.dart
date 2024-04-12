@@ -1,6 +1,6 @@
-import 'package:amazon_clone/componments/custom_textfield.dart';
-import 'package:amazon_clone/componments/customer_button.dart';
-import 'package:amazon_clone/features/home/services/home_services.dart';
+import 'package:Agricon/componments/custom_textfield.dart';
+import 'package:Agricon/componments/customer_button.dart';
+import 'package:Agricon/features/home/services/home_services.dart';
 import 'package:flutter/material.dart';
 
 class AddressScreen extends StatefulWidget {

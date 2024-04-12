@@ -1,4 +1,4 @@
-import 'package:amazon_clone/features/home/widgets/address_box.dart';
+import 'package:Agricon/features/home/widgets/address_box.dart';
 import 'package:flutter/material.dart';
 
 class EmptyCart extends StatelessWidget {

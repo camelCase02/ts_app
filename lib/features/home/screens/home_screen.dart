@@ -1,9 +1,9 @@
-import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/features/auth/services/auth_service.dart';
-import 'package:amazon_clone/features/home/widgets/address_box.dart';
-import 'package:amazon_clone/features/home/widgets/featured_products.dart';
-import 'package:amazon_clone/features/home/widgets/servicescard.dart';
-import 'package:amazon_clone/features/home/widgets/top_categories.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/features/auth/services/auth_service.dart';
+import 'package:Agricon/features/home/widgets/address_box.dart';
+import 'package:Agricon/features/home/widgets/featured_products.dart';
+import 'package:Agricon/features/home/widgets/servicescard.dart';
+import 'package:Agricon/features/home/widgets/top_categories.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,7 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final AuthService authService = AuthService();
   String selectedCategory = "";
   @override
   Widget build(BuildContext context) {
@@ -86,45 +85,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        title: const Text(
-                          "Are you Sure?",
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                        content: const Text(
-                          "This will log out from this device",
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text("No"),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              authService.logoutUser(context: context);
-                            },
-                            child: const Text("Yes"),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    "Logout",
-                    style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
-              ],
             )),
         body: SingleChildScrollView(
           child: Column(

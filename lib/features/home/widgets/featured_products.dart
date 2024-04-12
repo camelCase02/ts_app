@@ -1,7 +1,7 @@
-import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/features/home/services/home_services.dart';
-import 'package:amazon_clone/features/products/screens/product_details_screen.dart';
-import 'package:amazon_clone/models/product.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/features/home/services/home_services.dart';
+import 'package:Agricon/features/products/screens/product_details_screen.dart';
+import 'package:Agricon/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

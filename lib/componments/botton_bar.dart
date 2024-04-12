@@ -1,8 +1,8 @@
-import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/features/account/screens/account_screen.dart';
-import 'package:amazon_clone/features/cart/screen/cart_screen.dart';
-import 'package:amazon_clone/features/home/screens/home_screen.dart';
-import 'package:amazon_clone/features/menu/screen/menu_screen.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/features/account/screens/account_screen.dart';
+import 'package:Agricon/features/cart/screen/cart_screen.dart';
+import 'package:Agricon/features/home/screens/home_screen.dart';
+import 'package:Agricon/features/menu/screen/menu_screen.dart';
 import 'package:flutter/material.dart';
 
 class BottonBar extends StatefulWidget {

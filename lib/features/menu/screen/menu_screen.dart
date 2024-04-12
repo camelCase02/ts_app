@@ -1,6 +1,6 @@
-import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/features/menu/widgets/menu_box.dart';
-import 'package:amazon_clone/features/menu/widgets/menu_card.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/features/menu/widgets/menu_box.dart';
+import 'package:Agricon/features/menu/widgets/menu_card.dart';
 import 'package:flutter/material.dart';
 
 class MenuScreen extends StatelessWidget {

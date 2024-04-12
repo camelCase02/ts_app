@@ -1,6 +1,7 @@
-import 'package:amazon_clone/constants/global_veriables.dart';
+import 'package:Agricon/constants/global_veriables.dart';
 
-import 'package:amazon_clone/features/account/widgets/orders.dart';
+import 'package:Agricon/features/account/widgets/orders.dart';
+import 'package:Agricon/features/account/widgets/shopping_for.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/top_buttons.dart';
@@ -22,14 +23,7 @@ class AccountScreen extends StatelessWidget {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Image.asset(
-                    "assets/amazon_in.png",
-                    width: 120,
-                    height: 45,
-                  ),
-                ),
+               UnderAppbar(),
                 Container(
                   padding: const EdgeInsets.only(
                     left: 15,
@@ -51,19 +45,21 @@ class AccountScreen extends StatelessWidget {
               ],
             ),
           )),
-      body:  const Column(
-        children: [
-          UnderAppbar(),
-          SizedBox(
-            height: 10,
-          ),
-          TopButtons(),
-           SizedBox(
-            height: 20,
-          ),
-          Orders(),
-    
-        ],
+      body:  SingleChildScrollView(
+        child: const Column(
+          children: [
+            
+            SizedBox(
+              height: 10,
+            ),
+            TopButtons(),
+             SizedBox(
+              height: 20,
+            ),
+            Orders(),
+            ShoppingFor()
+          ],
+        ),
       ),
     );
   }

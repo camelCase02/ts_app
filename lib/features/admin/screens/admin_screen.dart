@@ -1,5 +1,5 @@
-import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/features/admin/screens/posts_screen.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/features/admin/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../auth/services/auth_service.dart';

@@ -1,5 +1,5 @@
-import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/constants/utilis.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/constants/utilis.dart';
 import 'package:flutter/material.dart';
 
 class ServicesCard extends StatelessWidget {

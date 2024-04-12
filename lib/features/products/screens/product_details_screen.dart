@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:amazon_clone/componments/customer_button.dart';
-import 'package:amazon_clone/componments/rating_stars.dart';
-import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/features/products/services/product_services.dart';
-import 'package:amazon_clone/features/search/screens/search_screen.dart';
-import 'package:amazon_clone/models/product.dart';
+import 'package:Agricon/componments/customer_button.dart';
+import 'package:Agricon/componments/rating_stars.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/features/products/services/product_services.dart';
+import 'package:Agricon/features/search/screens/search_screen.dart';
+import 'package:Agricon/models/product.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';

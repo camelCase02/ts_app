@@ -1,10 +1,10 @@
-import 'package:amazon_clone/componments/customer_button.dart';
-import 'package:amazon_clone/features/cart/widgets/cart_product.dart';
-import 'package:amazon_clone/features/cart/widgets/cart_sub_total.dart';
-import 'package:amazon_clone/features/cart/widgets/empty_cart.dart';
-import 'package:amazon_clone/features/home/services/home_services.dart';
-import 'package:amazon_clone/features/home/widgets/address_box.dart';
-import 'package:amazon_clone/providers/user_provider.dart';
+import 'package:Agricon/componments/customer_button.dart';
+import 'package:Agricon/features/cart/widgets/cart_product.dart';
+import 'package:Agricon/features/cart/widgets/cart_sub_total.dart';
+import 'package:Agricon/features/cart/widgets/empty_cart.dart';
+import 'package:Agricon/features/home/services/home_services.dart';
+import 'package:Agricon/features/home/widgets/address_box.dart';
+import 'package:Agricon/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';

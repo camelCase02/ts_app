@@ -1,4 +1,4 @@
-import 'package:amazon_clone/constants/global_veriables.dart';
+import 'package:Agricon/constants/global_veriables.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 

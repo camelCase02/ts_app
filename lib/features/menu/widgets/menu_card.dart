@@ -1,5 +1,5 @@
-import 'package:amazon_clone/features/menu/screen/category_detail.dart';
-import 'package:amazon_clone/features/search/screens/search_screen.dart';
+import 'package:Agricon/features/menu/screen/category_detail.dart';
+import 'package:Agricon/features/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class MenuCard extends StatefulWidget {
