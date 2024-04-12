@@ -48,6 +48,7 @@ class _AddressScreenState extends State<AddressScreen> {
                       onPressed: () async {
                         await homeService.orderComplete(
                           context: context,
+                          sum: widget.sum,
                         );
                         Navigator.of(context).pop();
                       },

@@ -141,13 +141,53 @@ class HomeServices {
 
   Future<void> orderComplete({
     required BuildContext context,
+    required int sum,
   }) async {
     try {
       final userProvider = Provider.of<UserProvider>(context, listen: false);
-      userProvider.user.cart.clear();
-      //make a request to clear in db
-      showSnackBar(context, "Order Placed!");
+      final user = userProvider.user;
+      int i = 0;
+      for (var element in user.cart) {
+        i++;
+        final order = Order(
+          productId: element['productId'],
+          quantity: element['quantity'],
+          orderedAt: DateTime.now(),
+          status: "Pending",
+          totalPrice: sum,
+          orderedBy: user.id,
+        );
+        print("Before request");
+        print(order.toMap());
+        http.Response res = await http.post(
+          Uri.parse('$uri/api/order'),
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-auth-token': userProvider.user.token,
+          },
+          body: order.toJson(),
+        );
+        print("after request!");
+        httpErrorHandler(
+          response: res,
+          context: context,
+          onSuccess: () {
+            showSnackBar(context, "Oder Placed for Product $i !");
+          },
+        );
+      }
+      user.cart.clear();
+      print("Before Cart CLear!!");
+      http.Response res = await http.delete(
+        Uri.parse('$uri/api/cart/clear'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+      );
+      showSnackBar(context, "All Orders Placed!");
     } catch (e) {
+      print(e);
       showSnackBar(context, "ERROR Occured: Cannot place order.");
     }
   }

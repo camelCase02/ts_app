@@ -1,35 +1,30 @@
 import 'dart:convert';
 
-import 'package:Agricon/models/product.dart';
-
 class Order {
-  final String id;
-  final List<Product> products;
-  final List<int> quantity;
-  final String address;
-  final String userId;
-  final int orderedAt;
-  final int status;
-  final double totalPrice;
+  final String? id;
+  final String productId;
+  final int quantity;
+  final String orderedBy;
+  final DateTime orderedAt;
+  final String status;
+  final int totalPrice;
   Order({
-    required this.id,
-    required this.products,
+    this.id,
+    required this.productId,
     required this.quantity,
-    required this.address,
-    required this.userId,
     required this.orderedAt,
     required this.status,
     required this.totalPrice,
+    required this.orderedBy,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'products': products.map((x) => x.toMap()).toList(),
+      'productId': productId,
       'quantity': quantity,
-      'address': address,
-      'userId': userId,
-      'orderedAt': orderedAt,
+      'orderedBy': orderedBy,
+      'orderedAt': orderedAt.toString(),
       'status': status,
       'totalPrice': totalPrice,
     };
@@ -37,17 +32,11 @@ class Order {
 
   factory Order.fromMap(Map<String, dynamic> map) {
     return Order(
-      id: map['_id'] ?? '',
-      products: List<Product>.from(
-          map['products']?.map((x) => Product.fromMap(x['product']))),
-      quantity: List<int>.from(
-        map['products']?.map(
-          (x) => x['quantity'],
-        ),
-      ),
-      address: map['address'] ?? '',
-      userId: map['userId'] ?? '',
-      orderedAt: map['orderedAt']?.toInt() ?? 0,
+      id: map['_id'],
+      productId: map['productId'],
+      quantity: map['quantity'] as int,
+      orderedBy: map['orderedBy'],
+      orderedAt: DateTime.parse(map['orderedAt']),
       status: map['status']?.toInt() ?? 0,
       totalPrice: map['totalPrice']?.toDouble() ?? 0.0,
     );
