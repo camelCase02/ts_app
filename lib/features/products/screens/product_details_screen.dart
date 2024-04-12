@@ -198,7 +198,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ),
               ),
               Card(
-                
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Column(

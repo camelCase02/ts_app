@@ -1,6 +1,7 @@
 import 'package:Agricon/constants/global_veriables.dart';
 import 'package:Agricon/features/home/services/home_services.dart';
 import 'package:Agricon/features/products/screens/product_details_screen.dart';
+import 'package:Agricon/features/products/services/product_services.dart';
 import 'package:Agricon/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -16,6 +17,8 @@ class FeaturedProducts extends StatefulWidget {
 
 class _FeaturedProductsState extends State<FeaturedProducts> {
   final HomeServices homeServices = HomeServices();
+    final ProductServices productServices = ProductServices();
+
 
   late List<Product> product;
 
@@ -26,6 +29,9 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
       product = await homeServices.fetchCategoryProducts(
           context: context, category: widget.selectedCategory!);
     }
+  }
+  void addToCart(Product product) {
+    productServices.addToCart(context: context, product: product);
   }
 
   @override
@@ -112,7 +118,9 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
                                       child: Row(
                                         children: [
                                           Expanded(flex: 1, child: Text("₹" + ""+ product[index].price.toString())),
-                                          Expanded(flex: 1, child: TextButton(onPressed: (){}, child: Text("Add", style: TextStyle(color: Colors.white),), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(GlobalVariables.selectedNavBarColor,),)))
+                                          Expanded(flex: 1, child: TextButton(onPressed: () {
+                                            addToCart(product[index]);
+                                          }, child: Text("Add", style: TextStyle(color: Colors.white),), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(GlobalVariables.selectedNavBarColor,),)))
                                       
                                         ],
                                       ),
