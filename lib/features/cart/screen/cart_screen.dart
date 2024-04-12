@@ -147,10 +147,14 @@ class _CartScreenState extends State<CartScreen> {
           return userCart.isEmpty
               ? const EmptyCart()
               : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const AddressBox(),
                     CartSubtotal(
                       sum: totalSum,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: const Text("Your order is eligible for FREE delivery", style: TextStyle(color: Colors.green),),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -171,7 +175,6 @@ class _CartScreenState extends State<CartScreen> {
                       child: ListView.builder(
                         itemCount: userCart.length,
                         itemBuilder: (context, index) {
-                          print(userCart[index].keys.first.id);
                           return CartProduct(
                             product: productMap[userCart[index].keys.first.id]!,
                           );

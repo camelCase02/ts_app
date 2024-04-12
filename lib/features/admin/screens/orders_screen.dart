@@ -1,8 +1,9 @@
-import 'package:amazon_clone/features/admin/screens/add_product_screen.dart';
-import 'package:amazon_clone/features/admin/services/admin_service.dart';
-import 'package:amazon_clone/features/home/services/home_services.dart';
-import 'package:amazon_clone/models/order.dart';
-import 'package:amazon_clone/models/product.dart';
+
+import 'package:Agricon/features/admin/screens/add_product_screen.dart';
+import 'package:Agricon/features/admin/services/admin_service.dart';
+import 'package:Agricon/features/home/services/home_services.dart';
+import 'package:Agricon/models/Order.dart';
+import 'package:Agricon/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

@@ -1,5 +1,6 @@
-import 'package:amazon_clone/features/admin/screens/add_product_screen.dart';
-import 'package:amazon_clone/features/admin/services/admin_service.dart';
+
+import 'package:Agricon/features/admin/screens/add_product_screen.dart';
+import 'package:Agricon/features/admin/services/admin_service.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

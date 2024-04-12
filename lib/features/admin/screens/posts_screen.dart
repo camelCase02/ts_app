@@ -78,6 +78,7 @@ class _PostsScreenState extends State<PostsScreen> {
                                 productList[index].description,
                                 overflow: TextOverflow.ellipsis,
                               ),
+                              leading: Image.network(productList[index].images[0], ),
                             ),
                             itemCount: productList.length,
                           ),
@@ -97,7 +98,7 @@ class _PostsScreenState extends State<PostsScreen> {
               ));
         },
         tooltip: "Add a new product",
-        child: const Icon(Icons.addchart_rounded),
+        child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

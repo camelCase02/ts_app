@@ -1,4 +1,7 @@
 import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/features/account/services/acount_services.dart';
+import 'package:Agricon/features/order/screens/order_details_screen.dart';
+import 'package:Agricon/models/Order.dart';
 import 'package:flutter/material.dart';
 
 import 'single_product.dart';
@@ -12,6 +15,18 @@ class Orders extends StatefulWidget {
 
 class _OrdersState extends State<Orders> {
   List<dynamic>? list;
+  final AccountServices accountServices = AccountServices();
+  List<Order>? orders;
+  @override
+  void initState() {
+    super.initState();
+    fetchOrders();
+  }
+
+  void fetchOrders() async {
+    orders = await accountServices.fetchMyOrders(context: context);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +55,20 @@ class _OrdersState extends State<Orders> {
         Container(
           height: 170,
           padding: const EdgeInsets.only(left: 10, top: 20, right: 0),
-          child: list==null? Text("No orders"): ListView.builder(
+          child: orders==null? Text("No orders"): ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: list!.length,
+              itemCount: orders!.length,
               itemBuilder: (context, index) {
-                return SingleProduct(
-                  image: list![index].toString(),
-                );
+                return InkWell(
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        OrderDetailsScreen.routName,
+                        arguments: orders![index],
+                      ),
+                      child: SingleProduct(
+                        image: orders![index].productId[0],
+                      ),
+                    );
               }),
         )
       ],
