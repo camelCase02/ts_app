@@ -1,6 +1,8 @@
-import 'package:amazon_clone/features/home/services/home_services.dart';
-import 'package:amazon_clone/features/products/screens/product_details_screen.dart';
-import 'package:amazon_clone/models/product.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/features/home/services/home_services.dart';
+import 'package:Agricon/features/products/screens/product_details_screen.dart';
+import 'package:Agricon/features/products/services/product_services.dart';
+import 'package:Agricon/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -15,6 +17,8 @@ class FeaturedProducts extends StatefulWidget {
 
 class _FeaturedProductsState extends State<FeaturedProducts> {
   final HomeServices homeServices = HomeServices();
+    final ProductServices productServices = ProductServices();
+
 
   late List<Product> product;
 
@@ -25,6 +29,9 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
       product = await homeServices.fetchCategoryProducts(
           context: context, category: widget.selectedCategory!);
     }
+  }
+  void addToCart(Product product) {
+    productServices.addToCart(context: context, product: product);
   }
 
   @override
@@ -65,11 +72,15 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
                 product.isEmpty
                     ? const Text("No products listed")
                     : SizedBox(
-                        height: 300,
+                      height: 500,
                         width: double.infinity,
                         child: GridView.builder(
+
+                          physics: NeverScrollableScrollPhysics(),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
+                                mainAxisExtent: 250,
+                                childAspectRatio: 170/219,
                                   crossAxisCount: 2),
                           itemBuilder: (context, index) {
                             return GestureDetector(
@@ -82,16 +93,39 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
                                   ),
                                 );
                               },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(24)),
+                              child: Card(
+                                margin: EdgeInsets.all(8),
+                                surfaceTintColor: Colors.white,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                                 child: Column(
                                   children: [
-                                    Image.network(
-                                      product[index].images[0],
-                                      fit: BoxFit.fitHeight,
-                                      alignment: Alignment.center,
-                                    )
+                                    Expanded(
+                                      flex: 2,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(24),
+                                        child: Image.network(
+                                          product[index].images[0],
+                                          fit: BoxFit.fitHeight,
+                                          alignment: Alignment.center, 
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5,),
+                                    Expanded(flex: 1, child: Text(product[index].name, style:const TextStyle(fontSize: 13, fontWeight: FontWeight.bold,),textAlign: TextAlign.center,)),
+                                    const SizedBox(height: 5,),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 7, right: 3,bottom: 2),
+                                      child: Row(
+                                        children: [
+                                          Expanded(flex: 1, child: Text("₹" + ""+ product[index].price.toString())),
+                                          Expanded(flex: 1, child: TextButton(onPressed: () {
+                                            addToCart(product[index]);
+                                          }, child: Text("Add", style: TextStyle(color: Colors.white),), style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(GlobalVariables.selectedNavBarColor,),)))
+                                      
+                                        ],
+                                      ),
+                                    ),
+
                                   ],
                                 ),
                               ),

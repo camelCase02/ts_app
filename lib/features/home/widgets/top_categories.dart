@@ -1,4 +1,4 @@
-import 'package:amazon_clone/constants/global_veriables.dart';
+import 'package:Agricon/constants/global_veriables.dart';
 import 'package:flutter/material.dart';
 
 class TopCategories extends StatelessWidget {
@@ -12,7 +12,7 @@ class TopCategories extends StatelessWidget {
       height: 70,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemExtent: 75,
+        itemExtent: 70,
         itemCount: GlobalVariables.categoryImages.length,
         itemBuilder: (context, index) {
           return GestureDetector(

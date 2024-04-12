@@ -1,5 +1,7 @@
-import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/features/admin/screens/posts_screen.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/features/admin/screens/analytics.dart';
+import 'package:Agricon/features/admin/screens/orders_screen.dart';
+import 'package:Agricon/features/admin/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../auth/services/auth_service.dart';
@@ -15,17 +17,21 @@ class AdminScreen extends StatefulWidget {
 class _AdminScreenState extends State<AdminScreen> {
   final AuthService authService = AuthService();
   int _page = 0;
-  final double bottonBarWidth = 42;
+  final double bottonBarWidth = 50;
   final double bottonBarBorderWidth = 5;
+  final double bottonBarHeight= 40;
 
   List<Widget> pages = [
     const PostsScreen(),
+    const AnalyticsScreen(),
+    // const Center(
+    //   child: Text("Analytics Page"),
+    // ),
     const Center(
-      child: Text("Analytics Page"),
+      child: Text("Offers Page"),
     ),
-    const Center(
-      child: Text("Orders"),
-    )
+    
+    const OrdersScreen(),
   ];
 
   void updatePage(int page) {
@@ -47,49 +53,48 @@ class _AdminScreenState extends State<AdminScreen> {
         items: [
           BottomNavigationBarItem(
               icon: Container(
-                width: bottonBarWidth,
+                width: 50,
+                height: bottonBarHeight,
                 decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                        color: _page == 0
-                            ? GlobalVariables.selectedNavBarColor
-                            : GlobalVariables.backgroundColor,
-                        width: bottonBarBorderWidth),
-                  ),
+                  borderRadius: BorderRadius.circular(12),
+                  color: _page == 0? GlobalVariables.selectedNavBarColor: GlobalVariables.backgroundColor,
                 ),
-                child: const Icon(Icons.home_outlined),
+                child: Icon(Icons.home_filled, size: 23, color: _page == 0 ? GlobalVariables.backgroundColor: Color(0xFF656565),),
               ),
-              label: "Posts"),
+              label: ""),
+         BottomNavigationBarItem(
+              icon: Container(
+                width: 50,
+                height: bottonBarHeight,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: _page == 1? GlobalVariables.selectedNavBarColor: GlobalVariables.backgroundColor,
+                ),
+                child: Icon(Icons.analytics, size: 23, color: _page == 1 ? GlobalVariables.backgroundColor: Color(0xFF656565),),
+              ),
+              label: ""),
           BottomNavigationBarItem(
               icon: Container(
-                width: bottonBarWidth,
+                width: 50,
+                height: bottonBarHeight,
                 decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                        color: _page == 1
-                            ? GlobalVariables.selectedNavBarColor
-                            : GlobalVariables.backgroundColor,
-                        width: bottonBarBorderWidth),
-                  ),
+                  borderRadius: BorderRadius.circular(12),
+                  color: _page == 2? GlobalVariables.selectedNavBarColor: GlobalVariables.backgroundColor,
                 ),
-                child: const Icon(Icons.analytics_outlined),
+                child: Icon(Icons.local_offer_sharp, size: 23, color: _page == 2 ? GlobalVariables.backgroundColor: Color(0xFF656565),),
               ),
-              label: "Analytics"),
-          BottomNavigationBarItem(
+              label: ""),
+              BottomNavigationBarItem(
               icon: Container(
-                width: bottonBarWidth,
+                width: 50,
+                height: bottonBarHeight,
                 decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                        color: _page == 2
-                            ? GlobalVariables.selectedNavBarColor
-                            : GlobalVariables.backgroundColor,
-                        width: bottonBarBorderWidth),
-                  ),
+                  borderRadius: BorderRadius.circular(12),
+                  color: _page == 3? GlobalVariables.selectedNavBarColor: GlobalVariables.backgroundColor,
                 ),
-                child: const Icon(Icons.all_inbox_outlined),
+                child: Icon(Icons.local_shipping, size: 23, color: _page == 3 ? GlobalVariables.backgroundColor: Color(0xFF656565),),
               ),
-              label: "Orders")
+              label: ""),
         ],
       ),
       appBar: PreferredSize(
@@ -99,18 +104,10 @@ class _AdminScreenState extends State<AdminScreen> {
               decoration:
                   const BoxDecoration(color: GlobalVariables.appBarGradient),
             ),
-            title: Row(
+            title:const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Image.asset(
-                    "assets/amazon_in.png",
-                    width: 120,
-                    height: 45,
-                  ),
-                ),
-                const Text(
+                 Text(
                   "Admin",
                   style: TextStyle(
                       fontSize: 20,

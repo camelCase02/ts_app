@@ -1,4 +1,5 @@
-import 'package:amazon_clone/features/account/widgets/account_button.dart';
+import 'package:Agricon/features/account/widgets/account_button.dart';
+import 'package:Agricon/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class TopButtons extends StatelessWidget {
@@ -6,12 +7,14 @@ class TopButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   final AuthService authService = AuthService();
+
     return Column(
       children: [
         Row(
           children: [
-            AccountButton(text: "Deine Bestellungen", onPressed: () {}),
-            AccountButton(text: "Wunschliste", onPressed: () {})
+            AccountButton(text: "Your Orders", onPressed: () {}),
+            AccountButton(text: "Buy Again", onPressed: () {})
           ],
         ),
         const SizedBox(
@@ -19,8 +22,36 @@ class TopButtons extends StatelessWidget {
         ),
         Row(
           children: [
-            AccountButton(text: "Kontakt Verkäufer", onPressed: () {}),
-            AccountButton(text: "Ausloggen", onPressed: () {}),
+            AccountButton(text: "Log Out", onPressed: () {
+              showDialog(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text(
+                          "Are you Sure?",
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        content: const Text(
+                          "This will log out from this device",
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("No"),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              authService.logoutUser(context: context);
+                            },
+                            child: const Text("Yes"),
+                          ),
+                        ],
+                      ),
+                    );
+            }),
+            AccountButton(text: "Saved", onPressed: () {}),
           ],
         )
       ],

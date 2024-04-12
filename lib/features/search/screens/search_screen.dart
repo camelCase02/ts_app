@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:amazon_clone/componments/loader.dart';
-import 'package:amazon_clone/features/home/widgets/address_box.dart';
-import 'package:amazon_clone/features/products/screens/product_details_screen.dart';
-import 'package:amazon_clone/features/search/services/search_services.dart';
-import 'package:amazon_clone/features/search/widgets/search_product.dart';
-import 'package:amazon_clone/models/product.dart';
+import 'package:Agricon/componments/loader.dart';
+import 'package:Agricon/features/home/widgets/address_box.dart';
+import 'package:Agricon/features/products/screens/product_details_screen.dart';
+import 'package:Agricon/features/search/services/search_services.dart';
+import 'package:Agricon/features/search/widgets/search_product.dart';
+import 'package:Agricon/models/product.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {

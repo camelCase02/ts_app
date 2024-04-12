@@ -1,7 +1,7 @@
 const express = require('express');
 const User = require('../models/user');
+const Order = require('../models/order');
 const cartRouter = express.Router();
-const jwt = require("jsonwebtoken");
 const auth = require('../middleware/auth');
 
 cartRouter.post("/api/cart/add", auth, async function (req, res) {
@@ -35,6 +35,51 @@ cartRouter.get("/api/cart", auth, async function (req, res) {
     }
     catch (e) {
         res.status(500).json({ error: e.message + " Something went wrong" })
+    }
+})
+cartRouter.delete("/api/cart/clear", auth, async function (req, res) {
+    try {
+        let user = await User.findById(req.user);
+        await user.clearCart();
+        user = await user.save();
+        res.json(user);
+    }
+    catch (e) {
+        res.status(500).json({ error: e.message + " Something went wrong" })
+    }
+})
+cartRouter.post("/api/order", async function (req, res) {
+    try {
+        const { productId, userId, quantity, orderedAt, status, totalPrice, orderedBy } = req.body;
+
+        const order = new Order({
+            userId,
+            productId,
+            quantity,
+            orderedAt,
+            status,
+            totalPrice,
+            orderedBy
+        });
+        await order.save();
+
+        res.status(201).json({ success: true, message: "Order placed successfully", order });
+    }
+    catch (e) {
+        console.log(e);
+        res.status(500).json({ error: e.message })
+    }
+})
+cartRouter.get("/api/orders/me", auth, async function (req, res) {
+    try {
+        const userId = req.user;
+
+        const orders = await Order.find({ orderedBy: userId }).limit(3);
+        res.json(orders);
+    }
+    catch (e) {
+        console.log(e);
+        res.status(500).json({ error: e.message })
     }
 })
 

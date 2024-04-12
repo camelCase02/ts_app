@@ -1,7 +1,8 @@
-import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/features/account/screens/account_screen.dart';
-import 'package:amazon_clone/features/cart/screen/cart_screen.dart';
-import 'package:amazon_clone/features/home/screens/home_screen.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/features/account/screens/account_screen.dart';
+import 'package:Agricon/features/cart/screen/cart_screen.dart';
+import 'package:Agricon/features/home/screens/home_screen.dart';
+import 'package:Agricon/features/menu/screen/menu_screen.dart';
 import 'package:flutter/material.dart';
 
 class BottonBar extends StatefulWidget {
@@ -14,13 +15,15 @@ class BottonBar extends StatefulWidget {
 
 class _BottonBarState extends State<BottonBar> {
   int _page = 0;
-  final double bottonBarWidth = 42;
+  final double bottonBarWidth = 50;
+  final double bottonBarHeight= 40;
   final double bottonBarBorderWidth = 5;
 
   List<Widget> pages = [
     const HomeScreen(),
-    const AccountScreen(),
     const CartScreen(),
+    const AccountScreen(),
+    const MenuScreen(),
   ];
 
   void updatePage(int page) {
@@ -38,59 +41,54 @@ class _BottonBarState extends State<BottonBar> {
         selectedItemColor: GlobalVariables.selectedNavBarColor,
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
         backgroundColor: GlobalVariables.backgroundColor,
-        iconSize: 28,
         onTap: updatePage,
         items: [
           BottomNavigationBarItem(
               icon: Container(
-                width: bottonBarWidth,
+                width: 50,
+                height: bottonBarHeight,
                 decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                        color: _page == 0
-                            ? GlobalVariables.selectedNavBarColor
-                            : GlobalVariables.backgroundColor,
-                        width: bottonBarBorderWidth),
-                  ),
+                  borderRadius: BorderRadius.circular(12),
+                  color: _page == 0? GlobalVariables.selectedNavBarColor: GlobalVariables.backgroundColor,
                 ),
-                child: const Icon(Icons.home_outlined),
+                child: Icon(Icons.home_filled, size: 23, color: _page == 0 ? GlobalVariables.backgroundColor: Color(0xFF656565),),
               ),
-              label: "Home"),
-          BottomNavigationBarItem(
+              label: ""),
+              BottomNavigationBarItem(
               icon: Container(
-                width: bottonBarWidth,
+                width: 50,
+                height: bottonBarHeight,
                 decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                        color: _page == 1
-                            ? GlobalVariables.selectedNavBarColor
-                            : GlobalVariables.backgroundColor,
-                        width: bottonBarBorderWidth),
-                  ),
+                  borderRadius: BorderRadius.circular(12),
+                  color: _page == 1? GlobalVariables.selectedNavBarColor: GlobalVariables.backgroundColor,
                 ),
-                child: const Icon(Icons.person_outline_outlined),
+                child: Icon(Icons.shopping_cart, size: 23, color: _page == 1 ? GlobalVariables.backgroundColor: Color(0xFF656565),),
               ),
               label: ""),
           BottomNavigationBarItem(
               icon: Container(
-                width: bottonBarWidth,
+                width: 50,
+                height: bottonBarHeight,
                 decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                        color: _page == 2
-                            ? GlobalVariables.selectedNavBarColor
-                            : GlobalVariables.backgroundColor,
-                        width: bottonBarBorderWidth),
-                  ),
+                  borderRadius: BorderRadius.circular(12),
+                  color: _page == 2? GlobalVariables.selectedNavBarColor: GlobalVariables.backgroundColor,
                 ),
-                child: const Badge(
-                    label: Text("2"),
-                    backgroundColor: Colors.white,
-                    textColor: Colors.black,
-                    child: Icon(Icons.shopping_cart_outlined)),
+                child:  Icon(Icons.person, size: 23, color: _page ==2 ? GlobalVariables.backgroundColor: Color(0xFF656565),),
               ),
-              label: "")
+              label: ""),
+          BottomNavigationBarItem(
+              icon: Container(
+                width: 50,
+                height: bottonBarHeight,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: _page == 3? GlobalVariables.selectedNavBarColor: GlobalVariables.backgroundColor,
+                ),
+                child: Icon(Icons.menu, size: 23, color: _page == 3 ? GlobalVariables.backgroundColor: Color(0xFF656565),),
+              ),
+              label: ""),
         ],
+
       ),
     );
   }

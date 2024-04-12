@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:amazon_clone/constants/error_handling.dart';
-import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/constants/utilis.dart';
-import 'package:amazon_clone/models/product.dart';
-import 'package:amazon_clone/providers/user_provider.dart';
+import 'package:Agricon/constants/error_handling.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/constants/utilis.dart';
+import 'package:Agricon/models/product.dart';
+import 'package:Agricon/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;

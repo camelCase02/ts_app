@@ -2,15 +2,15 @@
 
 // import 'dart:convert';
 
-// import 'package:amazon_clone/constants/error_handling.dart';
-// import 'package:amazon_clone/constants/global_veriables.dart';
-// import 'package:amazon_clone/constants/utilis.dart';
-// import 'package:amazon_clone/features/admin/screens/admin_screen.dart';
-// import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
-// import 'package:amazon_clone/features/home/screens/home_screen.dart';
-// import 'package:amazon_clone/models/user.dart';
-// import 'package:amazon_clone/providers/user_provider.dart';
-// import 'package:amazon_clone/router.dart';
+// import 'package:Agricon/constants/error_handling.dart';
+// import 'package:Agricon/constants/global_veriables.dart';
+// import 'package:Agricon/constants/utilis.dart';
+// import 'package:Agricon/features/admin/screens/admin_screen.dart';
+// import 'package:Agricon/features/auth/screens/auth_screen.dart';
+// import 'package:Agricon/features/home/screens/home_screen.dart';
+// import 'package:Agricon/models/user.dart';
+// import 'package:Agricon/providers/user_provider.dart';
+// import 'package:Agricon/router.dart';
 // import 'package:flutter/material.dart';
 // import 'package:http/http.dart' as http;
 // import 'package:provider/provider.dart';
@@ -151,15 +151,16 @@
 
 import 'dart:convert';
 
-import 'package:amazon_clone/constants/error_handling.dart';
-import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/constants/utilis.dart';
-import 'package:amazon_clone/features/admin/screens/admin_screen.dart';
-import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
-import 'package:amazon_clone/features/home/screens/home_screen.dart';
-import 'package:amazon_clone/models/user.dart';
-import 'package:amazon_clone/providers/user_provider.dart';
-import 'package:amazon_clone/router.dart';
+import 'package:Agricon/componments/botton_bar.dart';
+import 'package:Agricon/constants/error_handling.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/constants/utilis.dart';
+import 'package:Agricon/features/admin/screens/admin_screen.dart';
+import 'package:Agricon/features/auth/screens/auth_screen.dart';
+import 'package:Agricon/features/home/screens/home_screen.dart';
+import 'package:Agricon/models/user.dart';
+import 'package:Agricon/providers/user_provider.dart';
+import 'package:Agricon/router.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -245,7 +246,7 @@ class AuthService {
               Navigator.pushAndRemoveUntil(
                   context,
                   generateRoute(
-                    const RouteSettings(name: HomeScreen.routeName),
+                    const RouteSettings(name: BottonBar.routeName),
                   ),
                   (route) => false);
             }

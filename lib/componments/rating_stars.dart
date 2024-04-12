@@ -1,4 +1,4 @@
-import 'package:amazon_clone/constants/global_veriables.dart';
+import 'package:Agricon/constants/global_veriables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 

@@ -1,6 +1,6 @@
 {
-    "name": "amazon_clone",
-    "short_name": "amazon_clone",
+    "name": "Agricon",
+    "short_name": "Agricon",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,4 +1,3 @@
-import 'package:amazon_clone/features/home/widgets/address_box.dart';
 import 'package:flutter/material.dart';
 
 class EmptyCart extends StatelessWidget {
@@ -7,67 +6,9 @@ class EmptyCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const AddressBox(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-          child: Row(
-            children: [
-              Image.asset(
-                'assets/amazon_in.png',
-                width: 120,
-                height: 120,
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Your Amazon Cart is empty',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  InkWell(
-                    child: const Text(
-                      'Pick up where you left off',
-                      style: TextStyle(color: Colors.teal, fontSize: 15),
-                    ),
-                    onTap: () {
-                      showBottomModel(context);
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-        const Divider(),
-        const SizedBox(
-          height: 15,
-        ),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-          color: const Color.fromRGBO(249, 221, 221, 1),
-          child: Column(
-            children: const [
-              Text(
-                'Get 10% cashback up to \$50',
-                style: TextStyle(fontSize: 15),
-              ),
-              Text(
-                'Pay withh Amazon Pay UPI. T&C apply.',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-              ),
-            ],
-          ),
-        )
+        Center(child: Text("Your Cart is Empty"))
       ],
     );
   }

@@ -1,10 +1,10 @@
-import 'package:amazon_clone/componments/botton_bar.dart';
-import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/features/admin/screens/admin_screen.dart';
-import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
-import 'package:amazon_clone/features/auth/services/auth_service.dart';
-import 'package:amazon_clone/providers/user_provider.dart';
-import 'package:amazon_clone/router.dart';
+import 'package:Agricon/componments/botton_bar.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/features/admin/screens/admin_screen.dart';
+import 'package:Agricon/features/auth/screens/auth_screen.dart';
+import 'package:Agricon/features/auth/services/auth_service.dart';
+import 'package:Agricon/providers/user_provider.dart';
+import 'package:Agricon/router.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';

@@ -96,6 +96,16 @@ userSchema.methods.removeFromCart = async function (productId) {
         return { success: false, message: error.message };
     }
 };
+userSchema.methods.clearCart = async function () {
+    try {
+        // clear the cart
+        this.cart = [];
+        await this.save();
+        return { success: true, message: "cart successfully cleared!" };
+    } catch (error) {
+        return { success: false, message: error.message };
+    }
+};
 
 const User = mongoose.model("User", userSchema);
 

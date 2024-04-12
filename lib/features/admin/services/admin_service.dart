@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:amazon_clone/constants/error_handling.dart';
-import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/constants/utilis.dart';
-import 'package:amazon_clone/features/admin/model/sales.dart';
-import 'package:amazon_clone/models/Order.dart';
-import 'package:amazon_clone/models/product.dart';
-import 'package:amazon_clone/providers/user_provider.dart';
+import 'package:Agricon/constants/error_handling.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/constants/utilis.dart';
+import 'package:Agricon/features/admin/model/sales.dart';
+import 'package:Agricon/models/Order.dart';
+import 'package:Agricon/models/product.dart';
+import 'package:Agricon/providers/user_provider.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -15,7 +15,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminService {
-  void sellProducts({
+  var userprovider = UserProvider();
+  void sellProduct({
     required BuildContext context,
     required String name,
     required String description,
@@ -24,21 +25,27 @@ class AdminService {
     required String category,
     required List<File> images,
   }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
-      final cloudiary = CloudinaryPublic('df7v8b90n', 'ycjyycds');
-      List<String> imageUrl = [];
-      for (int i = 0; i < images.length; i++) {
-        CloudinaryResponse res = await cloudiary
-            .uploadFile(CloudinaryFile.fromFile(images[i].path, folder: name));
-        imageUrl.add(res.secureUrl);
-      }
+      final cloudinary = CloudinaryPublic('df7v8b90n', 'ycjyycds');
+      List<String> imgUrls = [];
 
+      for (int i = 0; i < images.length; i++) {
+        CloudinaryResponse res = await cloudinary.uploadFile(
+          CloudinaryFile.fromFile(
+            images[i].path,
+            resourceType: CloudinaryResourceType.Image,
+            folder: name,
+          ),
+        );
+        imgUrls.add(res.secureUrl);
+      }
       Product product = Product(
         name: name,
         description: description,
         quantity: quantity,
         price: price,
-        images: imageUrl,
+        images: imgUrls,
         category: category,
       );
       SharedPreferences sharedPreferences =
@@ -96,6 +103,66 @@ class AdminService {
       showSnackBar(context, e.toString());
     }
     return productList;
+  }
+
+  Future<List<int>> fetchAnalytics(BuildContext context) async {
+    List<int> productList = [];
+    try {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+      http.Response res =
+          await http.get(Uri.parse('$uri/admin/analytics'), headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      });
+
+      httpErrorHandler(
+        response: res,
+        context: context,
+        onSuccess: () {
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
+            productList.add(
+              jsonDecode(res.body)[i],
+            );
+          }
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return productList;
+  }
+
+  Future<List<Order>> fetchOrders(BuildContext context) async {
+    List<Order> list = [];
+    try {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+      http.Response res =
+          await http.get(Uri.parse('$uri/admin/orders'), headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      });
+
+      httpErrorHandler(
+        response: res,
+        context: context,
+        onSuccess: () {
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
+            list.add(
+              Order.fromJson(
+                jsonEncode(
+                  jsonDecode(res.body)[i],
+                ),
+              ),
+            );
+          }
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return list;
   }
 
   // delete product

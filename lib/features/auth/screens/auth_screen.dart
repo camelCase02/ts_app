@@ -1,6 +1,6 @@
-import 'package:amazon_clone/componments/custom_textfield.dart';
-import 'package:amazon_clone/constants/global_veriables.dart';
-import 'package:amazon_clone/features/auth/services/auth_service.dart';
+import 'package:Agricon/componments/custom_textfield.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+import 'package:Agricon/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../componments/customer_button.dart';

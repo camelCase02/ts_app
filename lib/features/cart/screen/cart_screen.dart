@@ -1,10 +1,12 @@
-import 'package:amazon_clone/componments/customer_button.dart';
-import 'package:amazon_clone/features/cart/widgets/cart_product.dart';
-import 'package:amazon_clone/features/cart/widgets/cart_sub_total.dart';
-import 'package:amazon_clone/features/cart/widgets/empty_cart.dart';
-import 'package:amazon_clone/features/home/services/home_services.dart';
-import 'package:amazon_clone/features/home/widgets/address_box.dart';
-import 'package:amazon_clone/providers/user_provider.dart';
+import 'package:Agricon/componments/customer_button.dart';
+import 'package:Agricon/features/cart/widgets/cart_product.dart';
+import 'package:Agricon/features/cart/widgets/cart_sub_total.dart';
+import 'package:Agricon/features/cart/widgets/empty_cart.dart';
+import 'package:Agricon/features/home/services/home_services.dart';
+import 'package:Agricon/features/home/widgets/address_box.dart';
+import 'package:Agricon/providers/user_provider.dart';
+import 'package:Agricon/constants/global_veriables.dart';
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -57,10 +59,73 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: SearchBar(),
-      ),
+      appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(70),
+            child: AppBar(
+              flexibleSpace: Container(
+                decoration:
+                    const BoxDecoration(color: GlobalVariables.appBarGradient),
+              ),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 44,
+                      margin: const EdgeInsets.only(
+                        left: 15,
+                      ),
+                      child: Material(
+                        elevation: 2,
+                        borderRadius: BorderRadius.circular(16),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.black, width: 1),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(16),
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: const EdgeInsets.only(top: 10),
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(16),
+                              ),
+                            ),
+                            suffixIcon: InkWell(
+                              onTap: () {},
+                              child: const Padding(
+                                padding: EdgeInsets.only(left: 6),
+                                child: Icon(
+                                  Icons.mic,
+                                  color: Colors.black,
+                                  size: 23,
+                                ),
+                              ),
+                            ),
+                            prefixIcon: InkWell(
+                              onTap: () {},
+                              child: const Padding(
+                                padding: EdgeInsets.only(left: 6),
+                                child: Icon(
+                                  Icons.search,
+                                  color: Colors.black,
+                                  size: 23,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )),
       body: FutureBuilder(
         future: getCartData(),
         builder: (context, snapshot) {
@@ -82,10 +147,14 @@ class _CartScreenState extends State<CartScreen> {
           return userCart.isEmpty
               ? const EmptyCart()
               : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const AddressBox(),
                     CartSubtotal(
                       sum: totalSum,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: const Text("Your order is eligible for FREE delivery", style: TextStyle(color: Colors.green),),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -106,7 +175,6 @@ class _CartScreenState extends State<CartScreen> {
                       child: ListView.builder(
                         itemCount: userCart.length,
                         itemBuilder: (context, index) {
-                          print(userCart[index].keys.first.id);
                           return CartProduct(
                             product: productMap[userCart[index].keys.first.id]!,
                           );
