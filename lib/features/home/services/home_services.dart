@@ -153,6 +153,7 @@ class HomeServices {
         final order = Order(
           productId: element['productId'],
           quantity: element['quantity'],
+          userId: user.id,
           orderedAt: DateTime.now(),
           status: "Pending",
           totalPrice: sum,
