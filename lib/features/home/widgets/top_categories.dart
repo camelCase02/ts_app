@@ -12,7 +12,7 @@ class TopCategories extends StatelessWidget {
       height: 70,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemExtent: 75,
+        itemExtent: 70,
         itemCount: GlobalVariables.categoryImages.length,
         itemBuilder: (context, index) {
           return GestureDetector(

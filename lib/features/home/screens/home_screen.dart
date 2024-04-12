@@ -2,6 +2,7 @@ import 'package:amazon_clone/constants/global_veriables.dart';
 import 'package:amazon_clone/features/auth/services/auth_service.dart';
 import 'package:amazon_clone/features/home/widgets/address_box.dart';
 import 'package:amazon_clone/features/home/widgets/featured_products.dart';
+import 'package:amazon_clone/features/home/widgets/servicescard.dart';
 import 'package:amazon_clone/features/home/widgets/top_categories.dart';
 import 'package:flutter/material.dart';
 
@@ -127,8 +128,10 @@ class _HomeScreenState extends State<HomeScreen> {
             )),
         body: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+
             children: [
-              const AddressBox(),
+             // const AddressBox(),
               const SizedBox(
                 height: 10,
               ),
@@ -147,8 +150,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 10,
               ),
               FeaturedProducts(selectedCategory: selectedCategory),
-              //CrauselImage(),
-              //DealOfDay()
+              const Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Text( "Farmicon Services",
+                  style: TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+              const ServicesCard(title: "Crop Doctor", description: "Turn your mobile phone into crop doctor: \n send us picture of your crop and get \n diagnosis of infected crop and its solution.", image:"assets/image 16.png" , buttontext:"Consult Now"),
+              const ServicesCard(title: "Predict Crop Price", description: "Turn your mobile phone into crop doctor: \n send us picture of your crop and get \n diagnosis of infected crop and its solution.", image: "assets/crop_price.png", buttontext: "Predict Now")
             ],
           ),
         ));
